@@ -1,16 +1,14 @@
 package com.example.sprint;
 
-import com.mirasense.scanditsdk.LegacyPortraitScanditSDKBarcodePicker;
-import com.mirasense.scanditsdk.ScanditSDKAutoAdjustingBarcodePicker;
-import com.mirasense.scanditsdk.ScanditSDKBarcodePicker;
-import com.mirasense.scanditsdk.interfaces.ScanditSDK;
-import com.mirasense.scanditsdk.interfaces.ScanditSDKListener;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.mirasense.scanditsdk.ScanditSDKAutoAdjustingBarcodePicker;
+import com.mirasense.scanditsdk.interfaces.ScanditSDK;
+import com.mirasense.scanditsdk.interfaces.ScanditSDKListener;
 
 public class ScannerActivity extends Activity implements ScanditSDKListener{
 
