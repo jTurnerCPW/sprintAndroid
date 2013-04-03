@@ -8,9 +8,10 @@
         android:id="@+id/etSearchPrinter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="type to filter"
+        android:hint="Type to Filter..."
         android:inputType="text"
-        android:maxLines="1" />
+        android:maxLines="1"
+        />
 
     <ListView
         android:id="@+id/lvPrinter"
