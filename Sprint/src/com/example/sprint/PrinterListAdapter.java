@@ -1,12 +1,12 @@
 package com.example.sprint;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -32,24 +32,14 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		resource = resourceId;
 		inflater = LayoutInflater.from(ctx);
 		context = ctx;
-
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 
 		/* create a new view of my layout and inflate it in the row */
 		convertView = (RelativeLayout) inflater.inflate(resource, null);
-		convertView.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                Log.d("LIST", "Selected item "+printerListFiltered.get(position).getName());
-
-            }
-        });
 		/* Get the printer object from the filtered list position*/
 		Printer printer = printerListFiltered.get(position);
 
@@ -66,7 +56,13 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		/* Set the printer image based on the type of printer */
 		ImageView imagePrinter = (ImageView) convertView
 				.findViewById(R.id.imgPrinter);
-		String uri = "drawable/printer_icon";// + printer.getImage();
+		
+		String uri = "";
+		if(printer.getColor())
+			uri = "drawable/colorprinter";
+		else
+			uri = "drawable/blackwhiteprinter";
+
 		int imageResource = context.getResources().getIdentifier(uri, null,
 				context.getPackageName());
 		Drawable image = context.getResources().getDrawable(imageResource);
@@ -112,8 +108,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 				ArrayList<Printer> nPrinterList = new ArrayList<Printer>();
 				for (Printer p : printerListOriginal) {
 					/* Compare the upper-case of the printer name with the text input */
-					if (p.getName().toUpperCase()
-							.startsWith(constraint.toString().toUpperCase())) {
+					if (p.getName().toUpperCase(Locale.getDefault())
+							.startsWith(constraint.toString().toUpperCase(Locale.getDefault()))) {
 						/* Add to the new filtered printer list */
 						nPrinterList.add(p);
 					}

@@ -3,7 +3,6 @@ package com.example.sprint;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,24 +18,22 @@ public class PrinterListActivity extends Activity implements OnItemClickListener
 
 	private ListView printerListView;
 	private EditText searchText;
-	private PrinterListAdapter adapter;
-	private Context context;
+	private PrinterListAdapter adapter = null;
+	private ArrayList<Printer> printers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_printer_list);
-		context = this;
 
 		// Get all printers
-		ArrayList<Printer> printerList = getPrinters();
+		getPrinters();
 
 		searchText = (EditText) findViewById(R.id.etSearchPrinter);
 		searchText.addTextChangedListener(filterTextWatcher);
+
 		
 		printerListView = (ListView) findViewById(R.id.lvPrinter);
-		adapter = new PrinterListAdapter(context, R.layout.printer_list_row,
-				printerList);
 		printerListView.setAdapter(adapter);
 		
 		/*  Set up the on-click methods next */
@@ -55,36 +52,39 @@ public class PrinterListActivity extends Activity implements OnItemClickListener
 		public void afterTextChanged(Editable s) {			
 		}
 
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 		}
 
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			Log.v("PrinterListActivity", "onTextChanged");
 			adapter.getFilter().filter(s);
 		}
-
 	};
 
-	private ArrayList<Printer> getPrinters() {
-		ArrayList<Printer> printerList = new ArrayList<Printer>();
-		
-		/* Dummy printer info */
-		printerList.add(new Printer("Rich's printer",
-				"location of printer 1", false));
-		printerList.add(new Printer("Josh's printer",
-				"location of printer 2", false));
-		printerList.add(new Printer("Kim's printer",
-				"location of printer 3", false));
-		
-		printerList.add(new Printer("Vinny's printer",
-				"location of printer 4", false));
-		printerList.add(new Printer("Mike's printer",
-				"location of printer 5", false));
-		printerList.add(new Printer("Jackson's printer",
-				"location of printer 6", false));
-		return printerList;
+	private void getPrinters() {	
+		PrinterListJSONTask task = new PrinterListJSONTask(this);
+		task.execute(this);
+	}
+	
+	public void setPrinters(ArrayList<Printer> printers) {
+		this.printers = printers;
+	}
+	
+	public void showList() {
+		adapter = buildAdapter();
+		printerListView.setAdapter(adapter);
+	}
+	
+	public void clearList() {
+		if(printerListView != null) {
+			printerListView.setAdapter(null);
+		}
+	}
+	
+	private PrinterListAdapter buildAdapter() {
+		final PrinterListAdapter arrayAdapter =
+			new PrinterListAdapter(this, R.layout.printer_list_row, printers);
+		return arrayAdapter;
 	}
 
 	@Override
