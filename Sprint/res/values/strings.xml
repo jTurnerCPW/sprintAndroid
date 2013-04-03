@@ -4,5 +4,7 @@
     <string name="app_name">Sprint</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="pref_sprintUsername_Title">Username</string>
+    <string name="pref_sprintUsername_default">NO_USERNAME</string>
 
 </resources>

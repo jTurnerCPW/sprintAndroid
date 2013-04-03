@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_sprintUsername_entries"><item>1</item></array>
+    <array name="pref_sprintUsername_values">&lt;item&gt;1&lt;/item&gt;</array>
+</resources>
