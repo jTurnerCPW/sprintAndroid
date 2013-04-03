@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class PrinterListActivity extends Activity implements OnItemClickListener{
 
@@ -40,7 +41,14 @@ public class PrinterListActivity extends Activity implements OnItemClickListener
 		printerListView.setAdapter(adapter);
 		
 		/*  Set up the on-click methods next */
-		printerListView.setOnItemClickListener(this);
+		//printerListView.setOnItemClickListener(this);
+		printerListView.setOnItemClickListener(new OnItemClickListener()
+		{
+		    @Override public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+		    { 
+		        System.out.println("test: "+this);
+		    }
+		});
 	}
 
 	@Override
