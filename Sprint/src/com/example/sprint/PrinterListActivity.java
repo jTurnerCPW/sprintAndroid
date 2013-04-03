@@ -9,10 +9,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class PrinterListActivity extends Activity{
+public class PrinterListActivity extends Activity implements OnItemClickListener{
 
 	private ListView printerListView;
 	private EditText searchText;
@@ -37,6 +40,7 @@ public class PrinterListActivity extends Activity{
 		printerListView.setAdapter(adapter);
 		
 		/*  Set up the on-click methods next */
+		printerListView.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -81,5 +85,11 @@ public class PrinterListActivity extends Activity{
 		printerList.add(new Printer("Jackson's printer",
 				"location of printer 6", false));
 		return printerList;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+		
 	}
 }
