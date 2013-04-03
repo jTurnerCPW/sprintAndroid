@@ -6,18 +6,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.view.View;
 
 public class MainActivity extends Activity {
 
 	private static final int EDIT_ID = Menu.FIRST+2;
+	private final static int BARCODE_SCAN_REQUEST = 2345;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	}
-
 
 						//TODO:check with mike re: ABS - do will the menu work ok with sherlock and no inflate?
 						//if no, figure out how to change the "settings" menu option to my "edit prefs"
@@ -54,8 +55,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void startScanner(View view) {
-		Intent intent = new Intent(this, ScannerActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(this, ScannerActivity.class);
+		Intent i = new Intent("com.google.zxing.client.android.SCAN");
+		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
+		startActivityForResult(i, BARCODE_SCAN_REQUEST);
 	}
 
 	public void startPrinterListActivity(View view){

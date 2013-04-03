@@ -5,7 +5,7 @@
         android:title="@string/pref_sprintUsername_Title"
         android:enabled="true"
         android:persistent="true"
-        android:summary="Please enter your username"
+        android:summary="@string/pref_sprintUsername_summary"
         android:entries="@array/pref_sprintUsername_entries"
         android:entryValues="@array/pref_sprintUsername_values"
         android:defaultValue="@string/pref_sprintUsername_default" />
