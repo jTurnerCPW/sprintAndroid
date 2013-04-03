@@ -24,8 +24,6 @@ public class MainActivity extends Activity {
 	public void startScanner(View view) {
 		Intent intent = new Intent(this, ScannerActivity.class);
 		startActivity(intent);
-
-		
 	}
 	/*HELLLO CHANGES*/
 
