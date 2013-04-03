@@ -13,5 +13,8 @@
     <string name="job_user">Job User</string>
     <string name="file_type">File Type</string>
     <string name="type_to_filter">type to filter</string>
+    
+    <string name="action_scan">Scan</string>
+    <string name="action_printers">Printer List</string>
 
 </resources>
