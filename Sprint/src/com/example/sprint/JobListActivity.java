@@ -64,7 +64,6 @@ public class JobListActivity extends Activity implements OnItemClickListener{
 			Log.v("JobListActivity", "onTextChanged");
 			adapter.getFilter().filter(s);
 		}
-
 	};
 
 	private ArrayList<Job> getJobs() {
