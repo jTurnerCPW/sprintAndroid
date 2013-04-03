@@ -20,15 +20,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 	}
 
-						//TODO:check with mike re: ABS - do will the menu work ok with sherlock and no inflate?
-						//if no, figure out how to change the "settings" menu option to my "edit prefs"
-	//	@Override
-	//	public boolean onCreateOptionsMenu(Menu menu) {
-	//		// Inflate the menu; this adds items to the action bar if it is present.
-	//		getMenuInflater().inflate(R.menu.main, menu);
-	//		return true;
-	//	}
-	//	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, EDIT_ID, Menu.NONE, "Edit Prefs")
@@ -55,7 +46,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void startScanner(View view) {
-//		Intent intent = new Intent(this, ScannerActivity.class);
+
 		Intent i = new Intent("com.google.zxing.client.android.SCAN");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
@@ -70,10 +61,5 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, JobListActivity.class);
 		startActivity(intent);
 	}
-	
-	/*HELLLO CHANGES*/
-	/*Mikes changes*/
-	/* Mikes more changes */
-	/* Mikes more more changes */
 
 }
