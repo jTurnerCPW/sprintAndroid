@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.View;
 public class MainActivity extends Activity {
 
 	private static final int EDIT_ID = Menu.FIRST+2;
+	private final static int BARCODE_SCAN_REQUEST = 2345;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void startScanner(View view) {
-		Intent intent = new Intent(this, ScannerActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(this, ScannerActivity.class);
+		Intent i = new Intent("com.google.zxing.client.android.SCAN");
+		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
+		startActivityForResult(i, BARCODE_SCAN_REQUEST);
 	}
 
 	public void startPrinterListActivity(View view){

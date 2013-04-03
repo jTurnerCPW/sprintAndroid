@@ -24,6 +24,5 @@ public class EditPreferences extends PreferenceActivity {
     super.onCreate(savedInstanceState);
     
     addPreferencesFromResource(R.xml.preferences);
-    addPreferencesFromResource(R.xml.preferences2);
   }
 }

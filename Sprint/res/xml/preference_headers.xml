@@ -1,12 +1,7 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
     <header android:fragment="com.example.sprint.StockPreferenceFragment"
-            android:title="Original"
-            android:summary="The original set from the other examples">
+            android:title="@string/pref_sprintUsername_Title"
+            android:summary="@string/pref_sprintUsername_summary">
       <extra android:name="resource" android:value="preferences" />
-    </header>
-    <header android:fragment="com.example.sprint.StockPreferenceFragment"
-            android:title="Other Stuff"
-            android:summary="Well, we needed to show two sets here...">
-      <extra android:name="resource" android:value="preferences2" />
     </header>
 </preference-headers>

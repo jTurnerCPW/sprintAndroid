@@ -6,6 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="pref_sprintUsername_Title">Username</string>
     <string name="pref_sprintUsername_default">NO_USERNAME</string>
+    <string name="pref_sprintUsername_summary">Please enter your username</string>
     <string name="jobs">Jobs</string>
     <string name="printers">Printers</string>
     <string name="scanner">Scanner</string>
