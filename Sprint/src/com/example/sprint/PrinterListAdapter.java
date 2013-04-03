@@ -3,8 +3,10 @@ package com.example.sprint;
 import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -34,11 +36,20 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		
 		/* create a new view of my layout and inflate it in the row */
 		convertView = (RelativeLayout) inflater.inflate(resource, null);
+		convertView.setOnClickListener(new OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                Log.d("LIST", "Selected item "+printerListFiltered.get(position).getName());
+
+            }
+        });
 		/* Get the printer object from the filtered list position*/
 		Printer printer = printerListFiltered.get(position);
 

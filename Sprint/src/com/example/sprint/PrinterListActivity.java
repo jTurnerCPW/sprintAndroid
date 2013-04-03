@@ -10,10 +10,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class PrinterListActivity extends Activity implements OnItemClickListener{
 
@@ -24,23 +26,32 @@ public class PrinterListActivity extends Activity implements OnItemClickListener
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_printer_list);
 		context = this;
-
 		// Get all printers
 		ArrayList<Printer> printerList = getPrinters();
-
-		searchText = (EditText) findViewById(R.id.etSearchPrinter);
-		searchText.addTextChangedListener(filterTextWatcher);
 		
 		printerListView = (ListView) findViewById(R.id.lvPrinter);
 		adapter = new PrinterListAdapter(context, R.layout.printer_list_row,
 				printerList);
 		printerListView.setAdapter(adapter);
-		
+
 		/*  Set up the on-click methods next */
-		printerListView.setOnItemClickListener(this);
+		//printerListView.setOnItemClickListener(this);
+		printerListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                      int position, long id) {
+
+				Log.e("MyApp","I am here");
+            }                
+		 });
+		
+
+		searchText = (EditText) findViewById(R.id.etSearchPrinter);
+		searchText.addTextChangedListener(filterTextWatcher);
 	}
 
 	@Override
