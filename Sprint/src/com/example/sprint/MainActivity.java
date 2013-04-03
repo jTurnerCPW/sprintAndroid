@@ -4,9 +4,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -19,7 +19,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	}
-
 
 						//TODO:check with mike re: ABS - do will the menu work ok with sherlock and no inflate?
 						//if no, figure out how to change the "settings" menu option to my "edit prefs"
