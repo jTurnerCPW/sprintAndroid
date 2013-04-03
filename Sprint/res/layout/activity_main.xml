@@ -21,7 +21,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
-        android:text="Scanner" 
+        android:text="@string/scanner" 
         android:onClick="startScanner"/>
 
     <Button
@@ -32,6 +32,16 @@
         android:layout_below="@+id/bScanner"
         android:layout_marginTop="55dp"
         android:onClick="startPrinterListActivity"
-        android:text="Printers" />
+        android:text="@string/printers" />
+    
+    <Button
+        android:id="@+id/bJobs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bPrinters"
+        android:layout_below="@+id/bPrinters"
+        android:layout_marginTop="55dp"
+        android:onClick="startJobListActivity"
+        android:text="@string/jobs" />
 
 </RelativeLayout>

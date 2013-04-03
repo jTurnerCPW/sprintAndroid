@@ -56,14 +56,18 @@ public class MainActivity extends Activity {
 	public void startScanner(View view) {
 		Intent intent = new Intent(this, ScannerActivity.class);
 		startActivity(intent);
-
-
 	}
 
 	public void startPrinterListActivity(View view){
 		Intent intent = new Intent(this, PrinterListActivity.class);
 		startActivity(intent);
 	}
+	
+	public void startJobListActivity(View view){
+		Intent intent = new Intent(this, JobListActivity.class);
+		startActivity(intent);
+	}
+	
 	/*HELLLO CHANGES*/
 	/*Mikes changes*/
 	/* Mikes more changes */
