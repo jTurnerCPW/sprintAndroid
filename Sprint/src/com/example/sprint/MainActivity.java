@@ -27,6 +27,11 @@ public class MainActivity extends Activity {
 
 		
 	}
+	
+	public void startPrinterListActivity(View view){
+		Intent intent = new Intent(this, PrinterListActivity.class);
+		startActivity(intent);
+	}
 	/*HELLLO CHANGES*/
 	/*Mikes changes*/
 
