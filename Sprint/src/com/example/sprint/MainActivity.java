@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,12 +36,13 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case EDIT_ID:
 			if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
-				startActivity(new Intent(this, EditPreferences.class));
+				startActivity(new Intent(this, EditPreferencesHC.class));
+				return true;
 			}
 			else {
-				startActivity(new Intent(this, EditPreferencesHC.class));
+				startActivity(new Intent(this, EditPreferences.class));
+				return true;
 			}
-			return(true);
 		}
 
 		return(super.onOptionsItemSelected(item));
