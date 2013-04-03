@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -50,6 +51,19 @@ public class MainActivity extends Activity {
 		Intent i = new Intent("com.google.zxing.client.android.SCAN");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
+		
+	}
+	
+	@Override 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+    	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
+    		String contents = data.getStringExtra("SCAN_RESULT");
+    		
+    		Toast toast = Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_LONG);
+    		toast.show();
+    	}
 	}
 
 	public void startPrinterListActivity(View view){
