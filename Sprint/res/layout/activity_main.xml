@@ -9,32 +9,39 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/bScanner"
-        android:layout_width="wrap_content"
+        android:id="@+id/scanButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp"
-        android:onClick="startScanner"
-        android:text="@string/scanner" />
+        android:layout_marginTop="25dp"
+        android:background="#888888"
+        android:paddingTop="5dp"
+        android:drawableTop="@drawable/qrbypdp"
+        android:onClick="startScanner" />
 
     <Button
-        android:id="@+id/bPrinters"
-        android:layout_width="wrap_content"
+        android:id="@+id/userButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bScanner"
-        android:layout_below="@+id/bScanner"
-        android:layout_marginTop="55dp"
-        android:onClick="startPrinterListActivity"
-        android:text="@string/printers" />
-    
+        android:layout_alignLeft="@+id/printerButton"
+        android:layout_below="@+id/printerButton"
+        android:layout_marginTop="25dp"
+        android:background="#888888"
+        android:paddingTop="5dp"
+        android:onClick="startPreferences"
+        android:drawableTop="@drawable/preferences" />
+
     <Button
-        android:id="@+id/bJobs"
-        android:layout_width="wrap_content"
+        android:id="@+id/printerButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bPrinters"
-        android:layout_below="@+id/bPrinters"
-        android:layout_marginTop="55dp"
-        android:onClick="startJobListActivity"
-        android:text="@string/jobs" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/scanButton"
+        android:layout_marginTop="25dp"
+        android:background="#888888"
+        android:drawableTop="@drawable/select_printer"
+        android:onClick="startPrinterListActivity"
+        android:paddingTop="5dp" />
 
 </RelativeLayout>
