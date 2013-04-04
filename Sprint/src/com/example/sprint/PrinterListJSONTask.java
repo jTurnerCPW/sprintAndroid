@@ -16,18 +16,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Printer>> {
-	private PrinterListActivity printerListActivity;
+	private PrinterListFragment printerListFragment;
 	ProgressDialog pd;
 	
-	public PrinterListJSONTask(PrinterListActivity printerListActivity) {
-		this.printerListActivity = printerListActivity;
+	public PrinterListJSONTask(PrinterListFragment printerListFragment) {
+		Log.v("PrinterListJSONTask", "constructor");
+		this.printerListFragment = printerListFragment;
 	}
 	
 	@Override
 	protected ArrayList<Printer> doInBackground(Context... params) {
-				
+		Log.v("PrinterListJSONTask", "background");
 		try{
 		    // Create a new HTTP Client and setup the GET
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
@@ -84,10 +86,12 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 					"location of printer 6", false));
       
 			// Return dummy info if not status 200
+			Log.v("PrinterListJSONTask", "dummy list");
 	        return printerList;
 
 		} catch(Exception e){
 		    // In your production code handle any errors and catch the individual exceptions
+			Log.v("PrinterListJSONTask", "catching errors");
 		    e.printStackTrace();
 		}
 		
@@ -96,15 +100,15 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 	
 	@Override
 	protected void onPostExecute(ArrayList<Printer> printers) {
-		printerListActivity.setPrinters(printers);
-		printerListActivity.showList();
+		printerListFragment.setPrinters(printers);
+		printerListFragment.showList();
 		pd.dismiss();
 	}
 	
 	@Override
 	protected void onPreExecute() {
-		printerListActivity.clearList();
-		pd = new ProgressDialog(printerListActivity);
+		printerListFragment.clearList();
+		pd = new ProgressDialog(printerListFragment.getActivity());
 		pd.setMessage("Loading Printers ...");
 		pd.show();
 		final AsyncTask<Context, Void, ArrayList<Printer>> task = this;

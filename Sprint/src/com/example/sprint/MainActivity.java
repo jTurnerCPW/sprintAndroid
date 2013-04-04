@@ -4,13 +4,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	private static final String EXTRA_SHOW_FRAGMENT = ":android:show_fragment";
+	private static final String EXTRA_NO_HEADERS = ":android:no_headers";
 	private static final int EDIT_ID = Menu.FIRST+2;
 	private final static int BARCODE_SCAN_REQUEST = 2345;
 
@@ -35,11 +39,16 @@ public class MainActivity extends Activity {
 		case EDIT_ID:
 			if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
 				startActivity(new Intent(this, EditPreferences.class));
+				return true;
 			}
 			else {
-				startActivity(new Intent(this, EditPreferencesHC.class));
+				Intent intent = new Intent( this, EditPreferencesHC.class );
+				/* Adding extras to skip showing headers in the preference activity */
+				intent.putExtra( EditPreferencesHC.EXTRA_SHOW_FRAGMENT, StockPreferenceFragment.class.getName() );
+				intent.putExtra( EditPreferencesHC.EXTRA_NO_HEADERS, true );
+				startActivity(intent);
+				return true;
 			}
-			return(true);
 		}
 
 		return(super.onOptionsItemSelected(item));
@@ -50,6 +59,19 @@ public class MainActivity extends Activity {
 		Intent i = new Intent("com.google.zxing.client.android.SCAN");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
+		
+	}
+	
+	@Override 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+    	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
+    		String contents = data.getStringExtra("SCAN_RESULT");
+    		
+    		Toast toast = Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_LONG);
+    		toast.show();
+    	}
 	}
 
 	public void startPrinterListActivity(View view){
