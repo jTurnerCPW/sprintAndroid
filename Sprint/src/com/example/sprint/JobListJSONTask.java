@@ -3,12 +3,17 @@ package com.example.sprint;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,7 +21,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	private JobListFragment jobListFragment;
@@ -32,10 +39,19 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 		try{
 		    // Create a new HTTP Client and setup the GET
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
-		    HttpGet httpGetRequest = new HttpGet("http://10.24.16.122/show_active_jobs.php");
-
+		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/show_active_jobs.php");
+		    
+		    // Grab the username from preferences
+		    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(jobListFragment.getActivity());
+		    String prefsUserName = preferences.getString("pref_sprintUsername","");
+		    		
+		    // Add your data
+	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+	        nameValuePairs.add(new BasicNameValuePair("user_name", prefsUserName));
+	        httpPostRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	        
 		    // Execute the request in the client
-		    HttpResponse httpResponse = defaultClient.execute(httpGetRequest);
+		    HttpResponse httpResponse = defaultClient.execute(httpPostRequest);
 		    
 		    // Check if the response was OK
 		    if(httpResponse.getStatusLine().getStatusCode() == 200)
