@@ -1,9 +1,11 @@
 package com.example.sprint;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 public class ABSFragmentActivity extends SherlockFragmentActivity {
 
@@ -16,8 +18,8 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 
 		// initialize actionBar
 		actionBar = getSupportActionBar();
-		
-		actionBar.setTitle("App Title");
+
+		actionBar.setTitle(getResources().getString(R.string.app_name));
 		actionBar.setIcon(R.drawable.printer_icon);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(false);
@@ -31,11 +33,22 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		return true;
 	}
 
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+
+		case android.R.id.home:
+			goHome();
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
 	private void goHome() {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
 	}
 
 }

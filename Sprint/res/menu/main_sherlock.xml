@@ -6,10 +6,6 @@
         android:showAsAction="ifRoom"
         android:title="@string/action_scan"/>
     <item
-        android:id="@+id/menu_printers"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_printers"/>
-    <item
         android:id="@+id/menu_settings"
         android:showAsAction="ifRoom"
         android:title="@string/action_settings"/>
