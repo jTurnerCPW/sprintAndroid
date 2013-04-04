@@ -58,17 +58,31 @@ public class JobListFragment extends Fragment{
 		searchText.addTextChangedListener(filterTextWatcher);
 		
 		jobListView = (ListView) view.findViewById(R.id.lvJob);
-		jobListView.setAdapter(adapter);
-		
+		jobListView.setAdapter(adapter);		
 	}
 	
-	private void getJobs() {	
+	public void getJobs() {	
 		JobListJSONTask task = new JobListJSONTask(this);
 		task.execute(getActivity());
 	}
 	
 	public void setJobs(ArrayList<Job> jobs) {
 		this.jobs = jobs;
+	}
+	
+	public void removeJob(String jobId)
+	{
+		// Loop to find the job and remove it
+		for(int i=0;i<jobs.size();i++)
+		{
+			if(jobs.get(i).getId().equals(jobId))
+			{
+				jobs.remove(i);
+			}
+		}
+		
+		// Refresh the list
+		showList();
 	}
 	
 	public void showList() {
@@ -84,7 +98,7 @@ public class JobListFragment extends Fragment{
 	
 	private JobListAdapter buildAdapter() {
 		final JobListAdapter arrayAdapter =
-			new JobListAdapter(getActivity(), R.layout.job_list_row, jobs);
+			new JobListAdapter(getActivity(), R.layout.job_list_row, jobs, this);
 		return arrayAdapter;
 	}
 

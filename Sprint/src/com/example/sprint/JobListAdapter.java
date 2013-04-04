@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,14 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class JobListAdapter extends ArrayAdapter<Job> {
 
 	private int resource;
+	private JobListFragment jobListFragment;
 	private LayoutInflater inflater;
 	private Context context;
 	private Filter filter;
@@ -26,13 +29,14 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 	private ArrayList<Job> jobListFiltered;
 
 	public JobListAdapter(Context ctx, int resourceId,
-			ArrayList<Job> jobs) {
+			ArrayList<Job> jobs, JobListFragment jobListFrag) {
 		super(ctx, resourceId, jobs);
 		jobListOriginal = jobs;
 		jobListFiltered = new ArrayList<Job>(jobs);
 		resource = resourceId;
 		inflater = LayoutInflater.from(ctx);
 		context = ctx;
+		jobListFragment = jobListFrag;
 	}
 
 	@Override
@@ -44,10 +48,9 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-
+                // Print the job on click
                 Log.d("JOB CLICKED", "Job: " + jobListFiltered.get(position).getName());
-
+                printJob(jobListFiltered.get(position).getId());
             }
         });
 		/* Get the job object from the filtered list position*/
@@ -155,9 +158,11 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 				jobListFiltered = (ArrayList<Job>) results.values;
 				notifyDataSetChanged();
 			}
-
 		}
-
 	}
-
+	
+	private void printJob(String jobId) {	
+		PrintJobTask task = new PrintJobTask(jobListFragment, jobId);
+		task.execute(this.getContext());
+	}
 }
