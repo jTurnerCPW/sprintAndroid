@@ -88,5 +88,4 @@ public class JobListFragment extends Fragment{
 		return arrayAdapter;
 	}
 
-
 }
