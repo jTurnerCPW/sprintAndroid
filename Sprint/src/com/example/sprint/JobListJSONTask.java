@@ -19,11 +19,11 @@ import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 
 public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
-	private JobListActivity jobListActivity;
+	private JobListFragment jobListFragment;
 	ProgressDialog pd;
 	
-	public JobListJSONTask(JobListActivity jobListActivity) {
-		this.jobListActivity = jobListActivity;
+	public JobListJSONTask(JobListFragment jobListFragment) {
+		this.jobListFragment = jobListFragment;
 	}
 	
 	@Override
@@ -99,16 +99,16 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	
 	@Override
 	protected void onPostExecute(ArrayList<Job> jobs) {
-		jobListActivity.setJobs(jobs);
-		jobListActivity.showList();
+		jobListFragment.setJobs(jobs);
+		jobListFragment.showList();
 		pd.dismiss();
 	}
 	
 	@Override
 	protected void onPreExecute() {
-		jobListActivity.clearList();
-		pd = new ProgressDialog(jobListActivity);
-		pd.setMessage("Loading Printers ...");
+		jobListFragment.clearList();
+		pd = new ProgressDialog(jobListFragment.getActivity());
+		pd.setMessage("Loading Jobs ...");
 		pd.show();
 		final AsyncTask<Context, Void, ArrayList<Job>> task = this;
 		pd.setOnDismissListener(new OnDismissListener() {

@@ -17,7 +17,10 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		// initialize actionBar
 		actionBar = getSupportActionBar();
 		
-		
+		actionBar.setTitle("App Title");
+		actionBar.setIcon(R.drawable.printer_icon);
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(false);
 
 	}
 

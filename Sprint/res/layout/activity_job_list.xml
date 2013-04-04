@@ -4,18 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/etSearchJob"
+    <fragment
+        android:id="@+id/jl_fragment"
+        android:name="com.example.sprint.JobListFragment"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/type_to_filter"
-        android:inputType="text"
-        android:maxLines="1" />
-
-    <ListView
-        android:id="@+id/lvJob"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </ListView>
+    </fragment>
 
 </LinearLayout>
