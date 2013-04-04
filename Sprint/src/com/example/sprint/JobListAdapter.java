@@ -5,9 +5,11 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
@@ -34,11 +36,20 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 
 		/* create a new view of my layout and inflate it in the row */
 		convertView = (RelativeLayout) inflater.inflate(resource, null);
+		convertView.setOnClickListener(new OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                Log.d("JOB CLICKED", "Printer: " + jobListFiltered.get(position).getName());
+
+            }
+        });
 		/* Get the job object from the filtered list position*/
 		Job job = jobListFiltered.get(position);
 
