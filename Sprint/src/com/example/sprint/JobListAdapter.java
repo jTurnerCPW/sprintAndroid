@@ -46,7 +46,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                Log.d("JOB CLICKED", "Printer: " + jobListFiltered.get(position).getName());
+                Log.d("JOB CLICKED", "Job: " + jobListFiltered.get(position).getName());
 
             }
         });
