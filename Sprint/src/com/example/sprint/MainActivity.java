@@ -82,18 +82,6 @@ public class MainActivity extends ABSFragmentActivity {
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
 		
 	}
-	
-	@Override 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		
-    	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
-    		String contents = data.getStringExtra("SCAN_RESULT");
-    		
-    		Toast toast = Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_LONG);
-    		toast.show();
-    	}
-	}
 
 	
 	public boolean startPreferences(View view){
@@ -119,6 +107,11 @@ public class MainActivity extends ABSFragmentActivity {
 	public void startJobListActivity(View view){
 		Intent intent = new Intent(this, JobListActivity.class);
 		startActivity(intent);
+	}
+	
+	@Override
+	protected void goHome(){
+		
 	}
 
 }

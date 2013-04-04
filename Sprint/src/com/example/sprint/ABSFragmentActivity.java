@@ -56,13 +56,13 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	private void startScanner() {
-		Intent i = new Intent("com.google.zxing.client.android.SCAN");
+	protected void startScanner() {
+		Intent i = new Intent("com.google.zxing.client.android.SCAN");		
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);	
 	}
 
-	private boolean startPreferences() {
+	protected boolean startPreferences() {
 		if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
 			startActivity(new Intent(this, EditPreferences.class));
 			return true;
@@ -77,8 +77,27 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		}
 		
 	}
+	
+	@Override 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+    	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
+    		String contents = data.getStringExtra("SCAN_RESULT");
+    		
+    		startJobListActivity();
+    	}
+	}
+	
+	
 
-	private void goHome() {
+	protected void startJobListActivity() {
+		Intent intent = new Intent(this, JobListActivity.class);
+		startActivity(intent);
+		
+	}
+
+	protected void goHome() {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
