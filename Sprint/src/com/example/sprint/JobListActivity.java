@@ -3,7 +3,6 @@ package com.example.sprint;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,28 +18,13 @@ public class JobListActivity extends Activity implements OnItemClickListener{
 
 	private ListView jobListView;
 	private EditText searchText;
-	private JobListAdapter adapter;
-	private Context context;
+	private JobListAdapter adapter = null;
+	private ArrayList<Job> jobs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_job_list);
-		context = this;
-
-		// Get all printers
-		ArrayList<Job> jobList = getJobs();
-
-		searchText = (EditText) findViewById(R.id.etSearchJob);
-		searchText.addTextChangedListener(filterTextWatcher);
-		
-		jobListView = (ListView) findViewById(R.id.lvJob);
-		adapter = new JobListAdapter(context, R.layout.job_list_row,
-				jobList);
-		jobListView.setAdapter(adapter);
-		
-		/*  Set up the on-click methods next */
-		jobListView.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -66,24 +50,48 @@ public class JobListActivity extends Activity implements OnItemClickListener{
 		}
 
 	};
-
-	private ArrayList<Job> getJobs() {
-		ArrayList<Job> jobList = new ArrayList<Job>();
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 		
-		/* Dummy job info */
-		jobList.add(new Job("1", "Compuware.doc",
-				"Josh", "doc"));
-		jobList.add(new Job("2", "Detroit.pdf",
-				"Mike", "pdf"));
-		jobList.add(new Job("3", "Payroll.xls",
-				"Kim", "xls"));		
-		jobList.add(new Job("4", "Watch.jpeg",
-				"Kobby", "jpeg"));
-		jobList.add(new Job("5", "Bike.png",
-				"Jackson", "png"));
-		jobList.add(new Job("6", "Vacation.gif",
-				"Rich", "gif"));
-		return jobList;
+		// Get all jobs
+		getJobs();
+
+		searchText = (EditText) findViewById(R.id.etSearchJob);
+		searchText.addTextChangedListener(filterTextWatcher);
+		
+		jobListView = (ListView) findViewById(R.id.lvJob);
+		jobListView.setAdapter(adapter);
+		
+		/*  Set up the on-click methods next */
+		jobListView.setOnItemClickListener(this);
+	}
+	
+	private void getJobs() {	
+		JobListJSONTask task = new JobListJSONTask(this);
+		task.execute(this);
+	}
+	
+	public void setJobs(ArrayList<Job> jobs) {
+		this.jobs = jobs;
+	}
+	
+	public void showList() {
+		adapter = buildAdapter();
+		jobListView.setAdapter(adapter);
+	}
+	
+	public void clearList() {
+		if(jobListView != null) {
+			jobListView.setAdapter(null);
+		}
+	}
+	
+	private JobListAdapter buildAdapter() {
+		final JobListAdapter arrayAdapter =
+			new JobListAdapter(this, R.layout.job_list_row, jobs);
+		return arrayAdapter;
 	}
 
 	@Override

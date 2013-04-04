@@ -31,7 +31,6 @@ public class PrinterListActivity extends Activity implements OnItemClickListener
 
 		searchText = (EditText) findViewById(R.id.etSearchPrinter);
 		searchText.addTextChangedListener(filterTextWatcher);
-
 		
 		printerListView = (ListView) findViewById(R.id.lvPrinter);
 		printerListView.setAdapter(adapter);

@@ -55,7 +55,25 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 		/* Set the job image based on the type of job */
 		ImageView imageFileType = (ImageView) convertView
 				.findViewById(R.id.imgFileType);
-		String uri = "drawable/worddoc";// + printer.getImage();
+
+		String jobType = job.getType();		
+		String uri = "";
+		if(jobType.equals("doc") || jobType.equals("txt")) {
+			uri = "drawable/worddoc";
+		}
+		else if(jobType.equals("pdf")) {
+			uri = "drawable/pdfdoc";
+		}
+		else if(jobType.equals("xls")) {
+			uri = "drawable/exceldoc";
+		}
+		else if(jobType.equals("ppt")) {
+			uri = "drawable/pptdoc";
+		}
+		else {
+			uri = "drawable/worddoc";
+		}
+		
 		int imageResource = context.getResources().getIdentifier(uri, null,
 				context.getPackageName());
 		Drawable image = context.getResources().getDrawable(imageResource);
