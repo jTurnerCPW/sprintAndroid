@@ -18,6 +18,7 @@ package com.example.sprint;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 
 //TODO This warning is irrelevant since we already do a check for the API level when the menu option is selected.  
 @SuppressLint("NewApi")
@@ -26,12 +27,7 @@ public class StockPreferenceFragment extends PreferenceFragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     
-    int res=getActivity()
-              .getResources()
-              .getIdentifier(getArguments().getString("resource"),
-                              "xml",
-                              getActivity().getPackageName());
-    
-    addPreferencesFromResource(res);
+    Log.v("STOCK-Pref", "addPref");
+    addPreferencesFromResource(R.xml.preferences);
   }
 }

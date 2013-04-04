@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	private static final String EXTRA_SHOW_FRAGMENT = ":android:show_fragment";
+	private static final String EXTRA_NO_HEADERS = ":android:no_headers";
 	private static final int EDIT_ID = Menu.FIRST+2;
 	private final static int BARCODE_SCAN_REQUEST = 2345;
 
@@ -36,11 +38,15 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case EDIT_ID:
 			if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
-				startActivity(new Intent(this, EditPreferencesHC.class));
+				startActivity(new Intent(this, EditPreferences.class));
 				return true;
 			}
 			else {
-				startActivity(new Intent(this, EditPreferences.class));
+				Intent intent = new Intent( this, EditPreferencesHC.class );
+				/* Adding extras to skip showing headers in the preference activity */
+				intent.putExtra( EditPreferencesHC.EXTRA_SHOW_FRAGMENT, StockPreferenceFragment.class.getName() );
+				intent.putExtra( EditPreferencesHC.EXTRA_NO_HEADERS, true );
+				startActivity(intent);
 				return true;
 			}
 		}
