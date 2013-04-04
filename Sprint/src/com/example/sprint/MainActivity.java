@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ABSFragmentActivity {
 
 	private static final int EDIT_ID = Menu.FIRST+2;
 	private final static int BARCODE_SCAN_REQUEST = 2345;
@@ -28,35 +28,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, EDIT_ID, Menu.NONE, "Edit Prefs")
-		.setIcon(R.drawable.misc)
-		.setAlphabeticShortcut('e');
 
-		return(super.onCreateOptionsMenu(menu));
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case EDIT_ID:
-			if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
-				startActivity(new Intent(this, EditPreferences.class));
-				return true;
-			}
-			else {
-				Intent intent = new Intent( this, EditPreferencesHC.class );
-				/* Adding extras to skip showing headers in the preference activity */
-				intent.putExtra( EditPreferencesHC.EXTRA_SHOW_FRAGMENT, StockPreferenceFragment.class.getName() );
-				intent.putExtra( EditPreferencesHC.EXTRA_NO_HEADERS, true );
-				startActivity(intent);
-				return true;
-			}
-		}
-
-		return(super.onOptionsItemSelected(item));
-	}
 	
 	
 
@@ -123,6 +95,22 @@ public class MainActivity extends Activity {
     	}
 	}
 
+	
+	public boolean startPreferences(View view){
+		if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
+			startActivity(new Intent(this, EditPreferences.class));
+			return true;
+		}
+		else {
+			Intent intent = new Intent( this, EditPreferencesHC.class );
+			/* Adding extras to skip showing headers in the preference activity */
+			intent.putExtra( EditPreferencesHC.EXTRA_SHOW_FRAGMENT, StockPreferenceFragment.class.getName() );
+			intent.putExtra( EditPreferencesHC.EXTRA_NO_HEADERS, true );
+			startActivity(intent);
+			return true;
+		}
+	}
+	
 	public void startPrinterListActivity(View view){
 		Intent intent = new Intent(this, PrinterListActivity.class);
 		startActivity(intent);
