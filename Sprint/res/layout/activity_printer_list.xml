@@ -4,18 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/etSearchPrinter"
+    <fragment
+        android:id="@+id/pl_fragment"
+        android:name="com.example.sprint.PrinterListFragment"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="type to filter"
-        android:inputType="text"
-        android:maxLines="1" />
-
-    <ListView
-        android:id="@+id/lvPrinter"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </ListView>
+    </fragment>
+
 
 </LinearLayout>
