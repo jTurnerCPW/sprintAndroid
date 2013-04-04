@@ -15,9 +15,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:background="#888888"
         android:paddingTop="5dp"
         android:drawableTop="@drawable/qrbypdp"
+        android:background="@layout/button"
         android:onClick="startScanner" />
 
     <Button
@@ -27,7 +27,7 @@
         android:layout_alignLeft="@+id/printerButton"
         android:layout_below="@+id/printerButton"
         android:layout_marginTop="25dp"
-        android:background="#888888"
+        android:background="@layout/button"
         android:paddingTop="5dp"
         android:onClick="startPreferences"
         android:drawableTop="@drawable/preferences" />
@@ -39,7 +39,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/scanButton"
         android:layout_marginTop="25dp"
-        android:background="#888888"
+        android:background="@layout/button"
         android:drawableTop="@drawable/select_printer"
         android:onClick="startPrinterListActivity"
         android:paddingTop="5dp" />
