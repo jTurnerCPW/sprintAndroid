@@ -22,24 +22,13 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 	private EditText searchText;
 	private PrinterListAdapter adapter = null;
 	private ArrayList<Printer> printers;
+	private LinearLayout view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.fragment_printer_list, container, false);
-
-		// Get all printers
-		getPrinters();
-
-		searchText = (EditText) view.findViewById(R.id.etSearchPrinter);
-		searchText.addTextChangedListener(filterTextWatcher);
-
+		view = (LinearLayout) inflater.inflate(R.layout.fragment_printer_list, container, false);
 		
-		printerListView = (ListView) view.findViewById(R.id.lvPrinter);
-		printerListView.setAdapter(adapter);
-		
-		/*  Set up the on-click methods next */
-		printerListView.setOnItemClickListener(this);
 		return view;
 	}
 
@@ -56,6 +45,24 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 			adapter.getFilter().filter(s);
 		}
 	};
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		// Get all printers
+		getPrinters();
+
+		searchText = (EditText) view.findViewById(R.id.etSearchPrinter);
+		searchText.addTextChangedListener(filterTextWatcher);
+
+		
+		printerListView = (ListView) view.findViewById(R.id.lvPrinter);
+		printerListView.setAdapter(adapter);
+		
+		/*  Set up the on-click methods next */
+		printerListView.setOnItemClickListener(this);
+	}
 
 	private void getPrinters() {
 		PrinterListJSONTask task = new PrinterListJSONTask(this);
