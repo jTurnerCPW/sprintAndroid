@@ -25,6 +25,7 @@ public class SprintApplication extends Application{
 
 	@Override
 	public void onTerminate() {
+		CompuwareUEM.shutdown();
 		super.onTerminate();
 	}
 	
