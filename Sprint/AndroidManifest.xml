@@ -8,8 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
-
-	<uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -45,8 +44,8 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/sprint_icon"
-        android:logo="@drawable/sprint_logo"
         android:label="@string/app_name"
+        android:logo="@drawable/sprint_logo"
         android:theme="@style/AppBaseTheme" >
         <activity
             android:name="com.example.sprint.MainActivity"
@@ -63,8 +62,8 @@
         </activity>
         <activity
             android:name="com.example.sprint.PrinterListActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.sprint.EditPreferences"
@@ -76,8 +75,8 @@
         </activity>
         <activity
             android:name="com.example.sprint.JobListActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.google.zxing.client.android.CaptureActivity"
@@ -91,7 +90,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.zxing.client.android.SCAN" />
+                <action android:name="com.compuware.pdp.sprint" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

@@ -73,7 +73,11 @@ public class MainActivity extends ABSFragmentActivity {
 
 	public void startScanner(View view) {
 
-		Intent i = new Intent("com.google.zxing.client.android.SCAN");
+		Intent i = new Intent();	
+		/* setting the action string.  No other apps should respond to this request
+		 * because of the unique action string
+		 */
+		i.setAction("com.compuware.pdp.sprint");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
 		
