@@ -1,5 +1,7 @@
 package com.example.sprint;
 
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -8,7 +10,7 @@ import android.util.Log;
 public class SprintApplication extends Application{
 	
     public void onCreate() {
- 
+		CompuwareUEM.startup(this , "com.example.sprint", "http://10.24.16.140:9998/", true, null);
     }
     
     public static void memCheck(Context context) {
