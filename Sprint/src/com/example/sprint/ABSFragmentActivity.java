@@ -85,14 +85,15 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
     	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
     		
-    		startJobListActivity();
+    		startJobListActivity(contents);
     	}
 	}
 	
 	
 
-	protected void startJobListActivity() {
+	protected void startJobListActivity(String printerName) {
 		Intent intent = new Intent(this, JobListActivity.class);
+		intent.putExtra("printer_name", printerName);
 		startActivity(intent);
 		
 	}

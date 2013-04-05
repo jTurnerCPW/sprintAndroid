@@ -5,7 +5,6 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -161,8 +159,8 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 		}
 	}
 	
-	private void printJob(String jobId) {	
-		PrintJobTask task = new PrintJobTask(jobListFragment, jobId);
+	private void printJob(String jobId) {
+		MoveJobTask task = new MoveJobTask(jobListFragment, jobId);
 		task.execute(this.getContext());
 	}
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,10 +45,9 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                Log.d("PRINTER CLICKED", "Printer: " + printerListFiltered.get(position).getName());
-
+                Intent intent = new Intent(context, JobListActivity.class);
+        		intent.putExtra("printer_name", printerListFiltered.get(position).getName());
+        		context.startActivity(intent);
             }
         });
 

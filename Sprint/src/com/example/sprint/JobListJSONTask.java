@@ -23,6 +23,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	private JobListFragment jobListFragment;
@@ -54,7 +55,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 		    
 		    // Check if the response was OK
 		    if(httpResponse.getStatusLine().getStatusCode() == 200)
-		    {
+		    {		    	
 		    	// Convert the httpResponse into a JSONArray
 		    	HttpEntity entity = httpResponse.getEntity();
 			    InputStream ist = entity.getContent();
@@ -66,50 +67,43 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 			    	content.write(buffer, 0, readCount);
 			    }
 			    String retVal = new String(content.toByteArray());
-			    JSONArray jsonArray = new JSONArray(retVal);
-
-			    // List of jobs
-			    ArrayList<Job> jobList = new ArrayList<Job>();
 			    
-			    // Loop through the jsonArray and get the user,title,id,type
-			    for (int i = 0; i < jsonArray.length(); i++) {
-			        JSONObject row = jsonArray.getJSONObject(i);
-			        String user = row.getString("user_name").trim();
-			        String name = row.getString("job_title").trim();
-			        String id = row.getString("job_id").trim();
-			        String type = row.getString("file_type").trim().toLowerCase(Locale.getDefault());
-			        
-			        jobList.add(new Job(id, name, user, type));
+			    Log.v("JOBLISTJSONTASK", retVal);
+			    
+			    // Attempt to convert the return value to a JSON Array
+			    try {
+			    	JSONArray jsonArray = new JSONArray(retVal);
+			    	
+			    	 // List of jobs
+				    ArrayList<Job> jobList = new ArrayList<Job>();
+				    
+				    // Loop through the jsonArray and get the user,title,id,type
+				    for (int i = 0; i < jsonArray.length(); i++) {
+				        JSONObject row = jsonArray.getJSONObject(i);
+				        String user = row.getString("user_name").trim();
+				        String name = row.getString("job_title").trim();
+				        String id = row.getString("job_id").trim();
+				        String type = row.getString("file_type").trim().toLowerCase(Locale.getDefault());
+				        
+				        jobList.add(new Job(id, name, user, type));
+				    }
+		      
+			        return jobList;
+			    } catch (Exception e) {
+			    	e.printStackTrace();
 			    }
-	      
-		        return jobList;
+
+			   return new ArrayList<Job>();
 		    }
 
-	        /* Dummy printer info */
-		    ArrayList<Job> jobList = new ArrayList<Job>();
-		    /* Dummy job info */
-			jobList.add(new Job("1", "Compuware.doc",
-					"Josh", "doc"));
-			jobList.add(new Job("2", "Detroit.pdf",
-					"Mike", "pdf"));
-			jobList.add(new Job("3", "Payroll.xls",
-					"Kim", "xls"));		
-			jobList.add(new Job("4", "Watch.jpeg",
-					"Kobby", "jpeg"));
-			jobList.add(new Job("5", "Bike.png",
-					"Jackson", "png"));
-			jobList.add(new Job("6", "Vacation.gif",
-					"Rich", "gif"));
-      
-			// Return dummy info if not status 200
-	        return jobList;
+	        return new ArrayList<Job>();
 
 		} catch(Exception e){
 		    // In your production code handle any errors and catch the individual exceptions
 		    e.printStackTrace();
 		}
 		
-        return null;
+        return new ArrayList<Job>();
 	}
 	
 	@Override

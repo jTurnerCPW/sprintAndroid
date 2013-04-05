@@ -21,14 +21,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-public class PrintJobTask extends AsyncTask<Context, Void, String> {
+public class MoveJobTask extends AsyncTask<Context, Void, String> {
 	private JobListFragment jobListFragment;
 	private String jobId;
+	private String printerName;
 	ProgressDialog pd;
 	
-	public PrintJobTask(JobListFragment jobListFragment, String jobId) {
-		this.jobListFragment = jobListFragment;
+	public MoveJobTask(JobListFragment jobListFrag, String jobId) {
+		this.jobListFragment = jobListFrag;
 		this.jobId = jobId;
+		this.printerName = ((JobListActivity) jobListFragment.getActivity()).getPrinterName();
 	}
 	
 	@Override
@@ -37,11 +39,12 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		try{
 		    // Create a new HTTP Client and setup the Post
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
-		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/release_print_job.php");;
+		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/move_print_job.php");;
 		    		
 		    // Add your data
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 	        nameValuePairs.add(new BasicNameValuePair("job_id", jobId));
+	        nameValuePairs.add(new BasicNameValuePair("printer_name", printerName));
 	        httpPostRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	        
 		    // Execute the request in the client
@@ -93,13 +96,15 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// If the print was successful then remove from the list
 		if(result.equals("Success"))
 		{
-			jobListFragment.removeJob(jobId);
+			// Print the Job
+			PrintJobTask task = new PrintJobTask(jobListFragment, jobId);
+			task.execute(jobListFragment.getActivity());
 		}
 		else
 		{
 			// Error - Job couldn't be moved
 			Toast.makeText(jobListFragment.getActivity(), 
-					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
+                    "Error - Couldn't move job to printer!", Toast.LENGTH_LONG).show();
 		}
 
 		pd.dismiss();
@@ -108,7 +113,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		pd = new ProgressDialog(jobListFragment.getActivity());
-		pd.setMessage("Sending Print Job...");
+		pd.setMessage("Moving Print Job...");
 		pd.show();
 		final AsyncTask<Context, Void, String> task = this;
 		pd.setOnDismissListener(new OnDismissListener() {
