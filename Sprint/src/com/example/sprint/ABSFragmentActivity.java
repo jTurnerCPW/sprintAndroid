@@ -1,8 +1,10 @@
 package com.example.sprint;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -15,7 +17,6 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
 		// initialize actionBar
@@ -57,16 +58,23 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 	}
 
 	protected void startScanner() {
-		Intent i = new Intent("com.google.zxing.client.android.SCAN");		
+		Intent i = new Intent();	
+		/* setting the action string.  No other apps should respond to this request
+		 * because of the unique action string
+		 */
+		i.setAction("com.compuware.pdp.sprint");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);	
+		
 	}
 
 	protected boolean startPreferences() {
+		/* Start preferences for versions below android 3.0 */
 		if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
 			startActivity(new Intent(this, EditPreferences.class));
 			return true;
 		}
+		/* Start preferences for android 3.0 + */
 		else {
 			Intent intent = new Intent( this, EditPreferencesHC.class );
 			/* Adding extras to skip showing headers in the preference activity */
@@ -81,7 +89,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 	@Override 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+		Log.v("ABS", "request code: " + requestCode);
     	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
     		
