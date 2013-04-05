@@ -16,6 +16,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -109,10 +111,18 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 		jobListFragment.setJobs(jobs);
 		jobListFragment.showList();
 		pd.dismiss();
+		
+		/*  Stop dynaTrace monitoring of jobListJSONTask */
+		CompuwareUEM.leaveAction("jobListJSONTask");
 	}
 	
 	@Override
 	protected void onPreExecute() {
+		
+		/*  Start dynaTrace monitoring of jobListJSONTask */
+		CompuwareUEM.enterAction("jobListJSONTask");
+		
+		
 		// Clear the list and start a progress dialog for loading jobs
 		jobListFragment.clearList();
 		pd = new ProgressDialog(jobListFragment.getActivity());
