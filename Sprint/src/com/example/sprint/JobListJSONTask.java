@@ -23,7 +23,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	private JobListFragment jobListFragment;
@@ -67,8 +66,6 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 			    	content.write(buffer, 0, readCount);
 			    }
 			    String retVal = new String(content.toByteArray());
-			    
-			    Log.v("JOBLISTJSONTASK", retVal);
 			    
 			    // Attempt to convert the return value to a JSON Array
 			    try {
