@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
+
 public class MainActivity extends ABSFragmentActivity {
 
 	private static final int EDIT_ID = Menu.FIRST+2;
@@ -34,7 +37,7 @@ public class MainActivity extends ABSFragmentActivity {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String user_name = prefs.getString(getResources().getString(R.string.pref_sprintUsername_key), "");
 		
-		/* if the username is not "" */
+		/* if the username is "" */
 		if (user_name.length()==0){
 			
 			displayUserNameAlert();
@@ -80,6 +83,9 @@ public class MainActivity extends ABSFragmentActivity {
 		i.setAction("com.compuware.pdp.sprint");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
+		
+		//dynaTrace Metric for scanning
+		CompuwareUEM.enterAction("scannerActivity");
 		
 	}
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
 
 public class ABSFragmentActivity extends SherlockFragmentActivity {
 
@@ -92,6 +93,9 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		Log.v("ABS", "request code: " + requestCode);
     	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
+    		
+    		//dynaTrace End Scanner
+    		CompuwareUEM.leaveAction("scannerActivity");
     		
     		startJobListActivity(contents);
     	}
