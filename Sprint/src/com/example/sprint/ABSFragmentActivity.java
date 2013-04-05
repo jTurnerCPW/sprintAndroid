@@ -1,6 +1,5 @@
 package com.example.sprint;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
