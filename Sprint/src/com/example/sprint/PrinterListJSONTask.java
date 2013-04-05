@@ -18,6 +18,8 @@ import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.compuware.apm.uem.mobile.android.*;
+
 public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Printer>> {
 	private PrinterListFragment printerListFragment;
 	ProgressDialog pd;
@@ -88,10 +90,16 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 		printerListFragment.setPrinters(printers);
 		printerListFragment.showList();
 		pd.dismiss();
+		
+		//Done DynaTracing the printer list populate
+		CompuwareUEM.leaveAction("printerListPopulate");
 	}
 	
 	@Override
 	protected void onPreExecute() {
+		//DynaTrace ALL THE THINGS!!! (But mostly right now I'd like to know how long it takes to populate the list of all network printers in the bldg)
+		CompuwareUEM.enterAction("printerListPopulate");
+		
 		// Clear the printer list and create the progress dialog
 		printerListFragment.clearList();
 		pd = new ProgressDialog(printerListFragment.getActivity());
