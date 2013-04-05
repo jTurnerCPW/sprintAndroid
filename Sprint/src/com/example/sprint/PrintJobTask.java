@@ -18,7 +18,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 public class PrintJobTask extends AsyncTask<Context, Void, String> {
@@ -26,6 +25,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	private String jobId;
 	ProgressDialog pd;
 	
+	// Constructor for the print job task
 	public PrintJobTask(JobListFragment jobListFragment, String jobId) {
 		this.jobListFragment = jobListFragment;
 		this.jobId = jobId;
@@ -39,7 +39,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
 		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/release_print_job.php");;
 		    		
-		    // Add your data
+		    // Add the job id to the post
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 	        nameValuePairs.add(new BasicNameValuePair("job_id", jobId));
 	        httpPostRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -62,6 +62,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 			    }
 			    String results = new String(content.toByteArray());
 			    
+			    // Check if the printing of the job was successful
 		    	if(results.equals("0"))
 		    	{
 		    		return "Success";
@@ -87,26 +88,26 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		
-		// Log the result of the print
-		Log.v("PRINT RESULT = ", result);
-		
-		// If the print was successful then remove from the list
+		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
+			// Remove the job printed from the list
 			jobListFragment.removeJob(jobId);
 		}
 		else
 		{
-			// Error - Job couldn't be moved
+			// Error - Job couldn't be printed
 			Toast.makeText(jobListFragment.getActivity(), 
 					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
 		}
-
+		
+		// Dismiss the progress dialog
 		pd.dismiss();
 	}
 	
 	@Override
 	protected void onPreExecute() {
+		// Create a progress dialog for sending the print job
 		pd = new ProgressDialog(jobListFragment.getActivity());
 		pd.setMessage("Sending Print Job...");
 		pd.show();
@@ -115,7 +116,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 			
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				// TODO Auto-generated method stub
+				// Allows canceling the task
 				task.cancel(true);
 			}
 		});

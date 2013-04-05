@@ -28,6 +28,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	private JobListFragment jobListFragment;
 	ProgressDialog pd;
 	
+	// Constructor for the JobListJSON Task
 	public JobListJSONTask(JobListFragment jobListFragment) {
 		this.jobListFragment = jobListFragment;
 	}
@@ -36,7 +37,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	protected ArrayList<Job> doInBackground(Context... params) {
 				
 		try{
-		    // Create a new HTTP Client and setup the GET
+		    // Create a new HTTP Client and setup the POST
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
 		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/show_active_jobs.php");
 		    
@@ -44,7 +45,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 		    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(jobListFragment.getActivity());
 		    String prefsUserName = preferences.getString("pref_sprintUsername","");
 		    		
-		    // Add your data
+		    // Add the username to the POST Data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 	        nameValuePairs.add(new BasicNameValuePair("user_name", prefsUserName));
 	        httpPostRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -96,7 +97,6 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	        return new ArrayList<Job>();
 
 		} catch(Exception e){
-		    // In your production code handle any errors and catch the individual exceptions
 		    e.printStackTrace();
 		}
 		
@@ -105,6 +105,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	
 	@Override
 	protected void onPostExecute(ArrayList<Job> jobs) {
+		// Set the jobs and show the list and dismiss the progress dialog
 		jobListFragment.setJobs(jobs);
 		jobListFragment.showList();
 		pd.dismiss();
@@ -112,6 +113,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	
 	@Override
 	protected void onPreExecute() {
+		// Clear the list and start a progress dialog for loading jobs
 		jobListFragment.clearList();
 		pd = new ProgressDialog(jobListFragment.getActivity());
 		pd.setMessage("Loading Jobs ...");
@@ -121,7 +123,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 			
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				// TODO Auto-generated method stub
+				// Allows canceling the task
 				task.cancel(true);
 			}
 		});

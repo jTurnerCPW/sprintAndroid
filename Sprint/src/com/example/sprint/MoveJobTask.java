@@ -18,7 +18,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 public class MoveJobTask extends AsyncTask<Context, Void, String> {
@@ -27,6 +26,7 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 	private String printerName;
 	ProgressDialog pd;
 	
+	// Constructor for the move job task
 	public MoveJobTask(JobListFragment jobListFrag, String jobId) {
 		this.jobListFragment = jobListFrag;
 		this.jobId = jobId;
@@ -41,7 +41,7 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
 		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/move_print_job.php");;
 		    		
-		    // Add your data
+		    // Add the job id and printer name to the post
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 	        nameValuePairs.add(new BasicNameValuePair("job_id", jobId));
 	        nameValuePairs.add(new BasicNameValuePair("printer_name", printerName));
@@ -65,6 +65,7 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 			    }
 			    String results = new String(content.toByteArray());
 			    
+			    // Check if the moving was successful or not
 		    	if(results.equals("0"))
 		    	{
 		    		return "Success";
@@ -80,7 +81,6 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 		    }
 
 		} catch(Exception e){
-		    // In your production code handle any errors and catch the individual exceptions
 		    e.printStackTrace();
 		}
 		
@@ -89,11 +89,7 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 	
 	@Override
 	protected void onPostExecute(String result) {
-		
-		// Log the result of the print
-		Log.v("PRINT RESULT = ", result);
-		
-		// If the print was successful then remove from the list
+		// Check if the moving of the print job was successful
 		if(result.equals("Success"))
 		{
 			// Print the Job
@@ -106,12 +102,14 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 			Toast.makeText(jobListFragment.getActivity(), 
                     "Error - Couldn't move job to printer!", Toast.LENGTH_LONG).show();
 		}
-
+		
+		// Dismiss the progress dialog
 		pd.dismiss();
 	}
 	
 	@Override
 	protected void onPreExecute() {
+		// Create a progress dialog for moving the job
 		pd = new ProgressDialog(jobListFragment.getActivity());
 		pd.setMessage("Moving Print Job...");
 		pd.show();
@@ -120,7 +118,7 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 			
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				// TODO Auto-generated method stub
+				// Allow the user to cancel the loading
 				task.cancel(true);
 			}
 		});

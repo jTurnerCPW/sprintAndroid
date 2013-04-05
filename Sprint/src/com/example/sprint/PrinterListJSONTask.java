@@ -22,6 +22,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 	private PrinterListFragment printerListFragment;
 	ProgressDialog pd;
 	
+	// Constructor for the PrinterListJSONTask
 	public PrinterListJSONTask(PrinterListFragment printerListFragment) {
 		Log.v("PrinterListJSONTask", "constructor");
 		this.printerListFragment = printerListFragment;
@@ -70,24 +71,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 		        return printerList;
 		    }
 
-	        /* Dummy printer info */
-		    ArrayList<Printer> printerList = new ArrayList<Printer>();
-			printerList.add(new Printer("Rich's printer",
-					"location of printer 1", false));
-			printerList.add(new Printer("Josh's printer",
-					"location of printer 2", false));
-			printerList.add(new Printer("Kim's printer",
-					"location of printer 3", false));			
-			printerList.add(new Printer("Vinny's printer",
-					"location of printer 4", false));
-			printerList.add(new Printer("Mike's printer",
-					"location of printer 5", false));
-			printerList.add(new Printer("Jackson's printer",
-					"location of printer 6", false));
-      
-			// Return dummy info if not status 200
-			Log.v("PrinterListJSONTask", "dummy list");
-	        return printerList;
+	        return new ArrayList<Printer>();
 
 		} catch(Exception e){
 		    // In your production code handle any errors and catch the individual exceptions
@@ -95,11 +79,12 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 		    e.printStackTrace();
 		}
 		
-        return null;
+        return new ArrayList<Printer>();
 	}
 	
 	@Override
 	protected void onPostExecute(ArrayList<Printer> printers) {
+		// Set the printers list up and dismiss the progress dialog
 		printerListFragment.setPrinters(printers);
 		printerListFragment.showList();
 		pd.dismiss();
@@ -107,6 +92,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 	
 	@Override
 	protected void onPreExecute() {
+		// Clear the printer list and create the progress dialog
 		printerListFragment.clearList();
 		pd = new ProgressDialog(printerListFragment.getActivity());
 		pd.setMessage("Loading Printers ...");
@@ -116,7 +102,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 			
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				// TODO Auto-generated method stub
+				// Allows canceling the progress dialog
 				task.cancel(true);
 			}
 		});
