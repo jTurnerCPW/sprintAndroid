@@ -10,7 +10,7 @@ import android.util.Log;
 public class SprintApplication extends Application{
 	
     public void onCreate() {
-		CompuwareUEM.startup(this , "com.example.sprint", "http://10.24.16.140:9998/", true, null);
+		CompuwareUEM.startup(this , "com.example.sprint", "http://10.24.16.122:9998/", true, null);
     }
     
     public static void memCheck(Context context) {
