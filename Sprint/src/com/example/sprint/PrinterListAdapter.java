@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
+	// Variables
 	private int resource;
 	private LayoutInflater inflater;
 	private Context context;
@@ -25,7 +26,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 	private ArrayList<Printer> printerListOriginal;
 	private ArrayList<Printer> printerListFiltered;
 
-
+	// Constructor
 	public PrinterListAdapter(Context ctx, int resourceId,
 			ArrayList<Printer> printers) {
 		super(ctx, resourceId, printers);
@@ -45,6 +46,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
             @Override
             public void onClick(View v) {
+            	// When a printer is clicked show the job list and send the printer selected
                 Intent intent = new Intent(context, JobListActivity.class);
         		intent.putExtra("printer_name", printerListFiltered.get(position).getName());
         		context.startActivity(intent);
@@ -144,9 +146,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 				printerListFiltered = (ArrayList<Printer>) results.values;
 				notifyDataSetChanged();
 			}
-
 		}
-
 	}
-
 }

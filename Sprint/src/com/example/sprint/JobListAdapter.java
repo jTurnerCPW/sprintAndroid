@@ -17,7 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class JobListAdapter extends ArrayAdapter<Job> {
-
+	
+	// Variables
 	private int resource;
 	private JobListFragment jobListFragment;
 	private LayoutInflater inflater;
@@ -26,6 +27,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 	private ArrayList<Job> jobListOriginal;
 	private ArrayList<Job> jobListFiltered;
 
+	// Constructor
 	public JobListAdapter(Context ctx, int resourceId,
 			ArrayList<Job> jobs, JobListFragment jobListFrag) {
 		super(ctx, resourceId, jobs);
@@ -40,14 +42,13 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
-		/* create a new view of my layout and inflate it in the row */
+		// create a new view of my layout and inflate it in the row
 		convertView = (RelativeLayout) inflater.inflate(resource, null);
 		convertView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // Print the job on click
-                Log.d("JOB CLICKED", "Job: " + jobListFiltered.get(position).getName());
                 printJob(jobListFiltered.get(position).getId());
             }
         });
@@ -159,6 +160,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 		}
 	}
 	
+	// Move and then Print the job id given
 	private void printJob(String jobId) {
 		MoveJobTask task = new MoveJobTask(jobListFragment, jobId);
 		task.execute(this.getContext());
