@@ -72,9 +72,9 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		
 		String uri = "";
 		if(printer.getColor())
-			uri = "drawable/colorprinter";
+			uri = "drawable/color_printer";
 		else
-			uri = "drawable/blackwhiteprinter";
+			uri = "drawable/blackwhite_printer";
 
 		int imageResource = context.getResources().getIdentifier(uri, null,
 				context.getPackageName());
