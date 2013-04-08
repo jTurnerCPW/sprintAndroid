@@ -67,7 +67,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		i.setAction("com.compuware.pdp.sprint");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);	
-		
+		finish();
 	}
 
 	protected boolean startPreferences() {
@@ -108,12 +108,14 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		Intent intent = new Intent(this, JobListActivity.class);
 		intent.putExtra("printer_name", printerName);
 		startActivity(intent);
+		finish();
 		
 	}
 
 	protected void goHome() {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 }
