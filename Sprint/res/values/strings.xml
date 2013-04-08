@@ -4,10 +4,11 @@
     <string name="app_name">Sprint</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="pref_sprintUsername_Title">Username</string>
+    <string name="pref_sprintUsername_Title">Compuware LAN ID</string>
     <string name="pref_sprintUsername_key">pref_sprintUsername</string>
-    <string name="pref_sprintUsername_default">userName</string>
-    <string name="pref_sprintUsername_summary">Please enter your username</string>
+    <string name="pref_sprintUsername_default"> </string>
+    <string name="pref_sprintUsername_summary">Please enter your Compuware LAN ID</string>
+    <string name="sprintUsername_hint">ex: amiabc0</string>
     <string name="jobs">Jobs</string>
     <string name="printers">Printers</string>
     <string name="printer">Printer</string>
