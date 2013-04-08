@@ -37,10 +37,17 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 			break;
 		case R.id.bPrint:
 			// Print the job.
+			String jobId = ((PrintConfirmationActivity)this.getActivity()).getJobId();
+			printJob(jobId);
 			break;
 		
 		}
 		
 	}
 	
+	// Move and then Print the job id given
+		private void printJob(String jobId) {
+			MoveJobTask task = new MoveJobTask(this, jobId);
+			task.execute(getActivity());
+		}
 }
