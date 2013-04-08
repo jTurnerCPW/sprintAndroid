@@ -1,35 +1,34 @@
 package com.example.sprint;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
-
 import android.view.View;
 import android.widget.EditText;
 
-
-import com.compuware.apm.uem.mobile.android.CompuwareUEM;
-
-public class MainActivity extends ABSFragmentActivity {
-
+public class DashboardActivity  extends ABSFragmentActivity {
 	private static final int EDIT_ID = Menu.FIRST+2;
 	private final static int BARCODE_SCAN_REQUEST = 2345;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-	}
-
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);       
+        setContentView(R.layout.dashboard); 
+    }
+    
+    
 
 	@Override
 	protected void onResume() {
@@ -86,7 +85,7 @@ public class MainActivity extends ABSFragmentActivity {
 						showNetworkOptions();
 					}
 				});
-		builder.setNegativeButton("cancel",
+		builder.setNegativeButton("Cancel",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
@@ -177,5 +176,4 @@ public class MainActivity extends ABSFragmentActivity {
 	protected void goHome(){
 
 	}
-
 }

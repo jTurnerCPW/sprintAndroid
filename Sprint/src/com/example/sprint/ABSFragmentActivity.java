@@ -52,8 +52,9 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		case R.id.menu_scan:
 			startScanner();
 			return true;
-		case R.id.menu_refresh:
-			refreshList();
+			// !!!
+		/*case R.id.menu_refresh:
+			refreshList();*/
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -130,7 +131,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 	}
 
 	protected void goHome() {
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, DashboardActivity.class);
 		startActivity(intent);
 		finish();
 	}

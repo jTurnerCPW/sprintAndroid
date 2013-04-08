@@ -50,7 +50,7 @@
         android:logo="@drawable/sprint_logo"
         android:theme="@style/AppBaseTheme" >
         <activity
-            android:name="com.example.sprint.MainActivity"
+            android:name="com.example.sprint.DashboardActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
