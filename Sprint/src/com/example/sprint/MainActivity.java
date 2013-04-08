@@ -110,6 +110,7 @@ public class MainActivity extends ABSFragmentActivity {
 
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(this);
+		input.setHint(R.string.sprintUsername_hint);
 		alert.setView(input);
 
 		alert.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
