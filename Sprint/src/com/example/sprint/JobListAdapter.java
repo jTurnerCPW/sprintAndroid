@@ -5,7 +5,6 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             @Override
             public void onClick(View v) {
                 // Print the job on click
-                printJob(jobListFiltered.get(position).getId());
+            	printJob(jobListFiltered.get(position).getId());
             }
         });
 		/* Get the job object from the filtered list position*/
@@ -163,6 +162,12 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 	// Move and then Print the job id given
 	private void printJob(String jobId) {
 		MoveJobTask task = new MoveJobTask(jobListFragment, jobId);
+		task.execute(this.getContext());
+	}
+	
+	// Cancel the job id given
+	private void cancelJob(String jobId) {
+		CancelJobTask task = new CancelJobTask(jobListFragment, jobId);
 		task.execute(this.getContext());
 	}
 }

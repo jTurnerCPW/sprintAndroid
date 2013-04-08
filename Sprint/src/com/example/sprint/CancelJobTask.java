@@ -20,13 +20,13 @@ import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-public class PrintJobTask extends AsyncTask<Context, Void, String> {
+public class CancelJobTask extends AsyncTask<Context, Void, String> {
 	private JobListFragment jobListFragment;
 	private String jobId;
 	ProgressDialog pd;
 	
 	// Constructor for the print job task
-	public PrintJobTask(JobListFragment jobListFragment, String jobId) {
+	public CancelJobTask(JobListFragment jobListFragment, String jobId) {
 		this.jobListFragment = jobListFragment;
 		this.jobId = jobId;
 	}
@@ -37,7 +37,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		try{
 		    // Create a new HTTP Client and setup the Post
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();
-		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/release_print_job.php");;
+		    HttpPost httpPostRequest = new HttpPost("http://10.24.16.122/cancel_print_job.php");;
 		    		
 		    // Add the job id to the post
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
@@ -92,7 +92,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
-			// Remove the job printed from the list and get new jobs
+			// Remove the job printed from the list
 			jobListFragment.removeJob(jobId);
 			jobListFragment.getJobs();
 		}
@@ -100,7 +100,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		{
 			// Error - Job couldn't be printed
 			Toast.makeText(jobListFragment.getActivity(), 
-					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
+					"Error - Couldn't cancel print job!", Toast.LENGTH_LONG).show();
 		}
 		
 		// Dismiss the progress dialog
@@ -111,7 +111,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	protected void onPreExecute() {
 		// Create a progress dialog for sending the print job
 		pd = new ProgressDialog(jobListFragment.getActivity());
-		pd.setMessage("Sending Print Job...");
+		pd.setMessage("Canceling Print Job...");
 		pd.show();
 		final AsyncTask<Context, Void, String> task = this;
 		pd.setOnDismissListener(new OnDismissListener() {
