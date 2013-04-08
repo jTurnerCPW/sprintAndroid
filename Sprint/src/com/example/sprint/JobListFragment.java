@@ -102,16 +102,9 @@ public class JobListFragment extends Fragment{
 		return arrayAdapter;
 	}
 	
+	//pretty much what it says.  explore get jobs for more.  basically refreshes list - removes old items and puts in new ones 
 	public void refreshJobs() {
-		
-		// Get all jobs
 		getJobs();
-
-		searchText = (EditText) view.findViewById(R.id.etSearchJob);
-		searchText.addTextChangedListener(filterTextWatcher);
-
-		jobListView = (ListView) view.findViewById(R.id.lvJob);
-		jobListView.setAdapter(adapter);	
 	}
 
 }

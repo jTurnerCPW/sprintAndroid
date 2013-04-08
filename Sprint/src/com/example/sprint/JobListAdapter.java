@@ -164,11 +164,6 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 			}
 		}
 	}
-
-	private void refreshJobs() {
-		jobListFragment.refreshJobs();
-		notifyDataSetChanged();
-	}
 	
 	// Cancel the job id given
 	private void cancelJob(String jobId) {

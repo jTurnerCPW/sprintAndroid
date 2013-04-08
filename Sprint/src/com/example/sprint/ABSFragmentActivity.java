@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -51,31 +50,18 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.menu_scan:
 			startScanner();
-			return true;
 		case R.id.menu_refresh:
 			refreshList();
-
+			return true;
+			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
-	protected void refreshList() {
-		
-		Log.v("refreshList", "yo bro");
-		Log.v("refreshList", "["+this.getLocalClassName()+"]");
-		
-		int stupidJavaIsStupid = -1;
-		
-		if(this.getLocalClassName().contentEquals("JobListActivity")) {
-			
-		} else {
-			if(this.getLocalClassName().contentEquals("PrinterListActivity")) {
-				stupidJavaIsStupid = 1;
-			}
-		}
-	}
 	
+	//override this in the refreshable list child classes to provide specific funtionality
+	public void refreshList(){};
+
 	protected void startScanner() {
 		Intent i = new Intent();	
 		/* setting the action string.  No other apps should respond to this request

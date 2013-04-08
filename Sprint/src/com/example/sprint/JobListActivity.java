@@ -27,5 +27,12 @@ public class JobListActivity extends ABSFragmentActivity{
 	public String getPrinterName() {
 		return printerName;
 	}
+	
+	//
+	@Override
+	public void refreshList(){
+		JobListFragment jlfrag = (JobListFragment)getSupportFragmentManager().findFragmentById(R.id.jl_fragment);
+		jlfrag.refreshJobs();
+	}
 
 }
