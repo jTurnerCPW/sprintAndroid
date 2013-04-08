@@ -48,12 +48,8 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 
             @Override
             public void onClick(View v) {
-
-                // Print the job on click
-            	//printJob(jobListFiltered.get(position).getId());
-
-                // Start the confirmation activity
             	
+                // Start the confirmation activity            	
             	Intent intent = new Intent(context, PrintConfirmationActivity.class);
         		intent.putExtra("printer_name", ((JobListActivity)jobListFragment.getActivity()).getPrinterName());
         		intent.putExtra("job_id", jobListFiltered.get(position).getId());
@@ -168,13 +164,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 			}
 		}
 	}
-	
-	// Move and then Print the job id given
-	private void printJob(String jobId) {
-		MoveJobTask task = new MoveJobTask(jobListFragment, jobId);
-		task.execute(this.getContext());
-	}
-	
+
 	// Cancel the job id given
 	private void cancelJob(String jobId) {
 		CancelJobTask task = new CancelJobTask(jobListFragment, jobId);

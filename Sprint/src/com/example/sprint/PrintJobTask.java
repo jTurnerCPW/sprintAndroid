@@ -21,13 +21,13 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 public class PrintJobTask extends AsyncTask<Context, Void, String> {
-	private JobListFragment jobListFragment;
+	private PrintConfirmationFragment PrintConfirmationFragment;
 	private String jobId;
 	ProgressDialog pd;
 	
 	// Constructor for the print job task
-	public PrintJobTask(JobListFragment jobListFragment, String jobId) {
-		this.jobListFragment = jobListFragment;
+	public PrintJobTask(PrintConfirmationFragment PrintConfirmationFrag, String jobId) {
+		this.PrintConfirmationFragment = PrintConfirmationFrag;
 		this.jobId = jobId;
 	}
 	
@@ -65,7 +65,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 			    // Check if the printing of the job was successful
 		    	if(results.equals("0"))
 		    	{
-		    		Thread.sleep(3000);
+		    		Thread.sleep(2000);
 		    		return "Success";
 		    	}
 		    	else
@@ -92,14 +92,12 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
-			// Remove the job printed from the list and get new jobs
-			jobListFragment.removeJob(jobId);
-			jobListFragment.getJobs();
+			// GOOD
 		}
 		else
 		{
 			// Error - Job couldn't be printed
-			Toast.makeText(jobListFragment.getActivity(), 
+			Toast.makeText(PrintConfirmationFragment.getActivity(), 
 					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
 		}
 		
@@ -110,7 +108,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		// Create a progress dialog for sending the print job
-		pd = new ProgressDialog(jobListFragment.getActivity());
+		pd = new ProgressDialog(PrintConfirmationFragment.getActivity());
 		pd.setMessage("Sending Print Job...");
 		pd.show();
 		final AsyncTask<Context, Void, String> task = this;

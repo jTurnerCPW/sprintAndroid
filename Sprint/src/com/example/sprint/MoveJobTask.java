@@ -21,16 +21,16 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 public class MoveJobTask extends AsyncTask<Context, Void, String> {
-	private JobListFragment jobListFragment;
+	private PrintConfirmationFragment printConfirmationFragment;
 	private String jobId;
 	private String printerName;
 	ProgressDialog pd;
 	
 	// Constructor for the move job task
-	public MoveJobTask(JobListFragment jobListFrag, String jobId) {
-		this.jobListFragment = jobListFrag;
+	public MoveJobTask(PrintConfirmationFragment printConfirmationFrag, String jobId) {
+		this.printConfirmationFragment = printConfirmationFrag;
 		this.jobId = jobId;
-		this.printerName = ((JobListActivity) jobListFragment.getActivity()).getPrinterName();
+		this.printerName = ((PrintConfirmationActivity) printConfirmationFragment.getActivity()).getPrinterName();
 	}
 	
 	@Override
@@ -93,13 +93,13 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 		if(result.equals("Success"))
 		{
 			// Print the Job
-			PrintJobTask task = new PrintJobTask(jobListFragment, jobId);
-			task.execute(jobListFragment.getActivity());
+			PrintJobTask task = new PrintJobTask(printConfirmationFragment, jobId);
+			task.execute(printConfirmationFragment.getActivity());
 		}
 		else
 		{
 			// Error - Job couldn't be moved
-			Toast.makeText(jobListFragment.getActivity(), 
+			Toast.makeText(printConfirmationFragment.getActivity(), 
                     "Error - Couldn't move job to printer!", Toast.LENGTH_LONG).show();
 		}
 		
@@ -110,7 +110,7 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		// Create a progress dialog for moving the job
-		pd = new ProgressDialog(jobListFragment.getActivity());
+		pd = new ProgressDialog(printConfirmationFragment.getActivity());
 		pd.setMessage("Moving Print Job...");
 		pd.show();
 		final AsyncTask<Context, Void, String> task = this;
