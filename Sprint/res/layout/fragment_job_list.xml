@@ -8,7 +8,7 @@
         android:id="@+id/etSearchJob"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/type_to_filter"
+        android:hint="@string/job_filter"
         android:inputType="text"
         android:maxLines="1" />
 

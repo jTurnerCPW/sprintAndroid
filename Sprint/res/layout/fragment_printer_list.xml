@@ -8,7 +8,7 @@
         android:id="@+id/etSearchPrinter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="type to filter"
+        android:hint="@string/printer_filter"
         android:inputType="text"
         android:maxLines="1" />
 
