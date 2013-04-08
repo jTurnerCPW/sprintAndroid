@@ -1,47 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
+    <ImageButton
         android:id="@+id/scanButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:paddingTop="5dp"
-        android:drawableTop="@drawable/qrbypdp"
+        android:layout_margin="10dip"
+        android:layout_weight="1"
         android:background="@layout/button"
-        android:onClick="startScanner" />
+        android:contentDescription="select scanner"
+        android:gravity="center_horizontal"
+        android:onClick="startScanner"
+        android:src="@drawable/qrbypdp" />
 
-    <Button
-        android:id="@+id/userButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/printerButton"
-        android:layout_below="@+id/printerButton"
-        android:layout_marginTop="25dp"
-        android:background="@layout/button"
-        android:paddingTop="5dp"
-        android:onClick="startPreferences"
-        android:drawableTop="@drawable/preferences" />
-
-    <Button
+    <ImageButton
         android:id="@+id/printerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/scanButton"
-        android:layout_marginTop="25dp"
+        android:layout_margin="10dip"
+        android:layout_weight="1"
         android:background="@layout/button"
-        android:drawableTop="@drawable/select_printer"
+        android:contentDescription="select printer"
         android:onClick="startPrinterListActivity"
-        android:paddingTop="5dp" />
+        android:src="@drawable/select_printer" />
 
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/userButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:layout_weight="1"
+        android:background="@layout/button"
+        android:contentDescription="select preferences"
+        android:onClick="startPreferences"
+        android:src="@drawable/preferences" />
+
+</LinearLayout>

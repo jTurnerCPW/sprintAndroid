@@ -1,6 +1,7 @@
 package com.example.sprint;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		actionBar.setIcon(R.drawable.printer_icon);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setBackgroundDrawable(new ColorDrawable(0xfff99c20));
 
 	}
 
