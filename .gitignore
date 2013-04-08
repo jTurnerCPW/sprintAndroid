@@ -1,2 +1,37 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+
+#mac nonsense
+*.DS_Store
+
+ActionBarSherlock/.settings/org.eclipse.jdt.core.prefs
+
+CaptureActivity/.settings/org.eclipse.jdt.core.prefs
+
+Sprint/.DS_Store
+
+CaptureActivity/.DS_Store
+
+Sprint/.DS_Store
 
 .gitignore
+
+Sprint/.DS_Store
