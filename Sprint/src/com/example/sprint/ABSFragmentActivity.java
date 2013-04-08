@@ -52,9 +52,8 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		case R.id.menu_scan:
 			startScanner();
 			return true;
-			// !!!
-		/*case R.id.menu_refresh:
-			refreshList();*/
+		case R.id.menu_refresh:
+			refreshList();
 
 		default:
 			return super.onOptionsItemSelected(item);

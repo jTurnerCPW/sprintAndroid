@@ -20,8 +20,7 @@ public class JobListActivity extends ABSFragmentActivity{
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
 		
-		// !!!
-		//getSupportMenuInflater().inflate(R.menu.refreshable_sherlock, menu);
+		getSupportMenuInflater().inflate(R.menu.refreshable_sherlock, menu);
 		return true;
 	}
 	
