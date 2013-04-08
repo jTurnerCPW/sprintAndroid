@@ -101,6 +101,11 @@
             android:name="com.google.zxing.client.android.HelpActivity"
             android:label="@string/app_name">
         </activity>
+        <activity
+            android:name="com.example.sprint.PrintConfirmationActivity"
+            android:label="@string/app_name">
+            
+        </activity>
     </application>
 
 </manifest>

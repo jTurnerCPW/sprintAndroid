@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +48,17 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 
             @Override
             public void onClick(View v) {
+
                 // Print the job on click
-            	printJob(jobListFiltered.get(position).getId());
+            	//printJob(jobListFiltered.get(position).getId());
+
+                // Start the confirmation activity
+            	
+            	Intent intent = new Intent(context, PrintConfirmationActivity.class);
+        		intent.putExtra("printer_name", ((JobListActivity)jobListFragment.getActivity()).getPrinterName());
+        		intent.putExtra("job_id", jobListFiltered.get(position).getId());
+        		context.startActivity(intent);
+            	
             }
         });
 		/* Get the job object from the filtered list position*/
