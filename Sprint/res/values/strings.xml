@@ -26,5 +26,6 @@
     
     <string name="action_scan">Scan</string>
     <string name="action_printers">Printer List</string>
+    <string name="action_refresh">Refresh List</string>
 
 </resources>
