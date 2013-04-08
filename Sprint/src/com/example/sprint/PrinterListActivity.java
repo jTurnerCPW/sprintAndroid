@@ -10,5 +10,12 @@ public class PrinterListActivity extends ABSFragmentActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_printer_list);
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		getSupportMenuInflater().inflate(R.menu.refreshable_sherlock, menu);
+		return true;
+	}
 
 }

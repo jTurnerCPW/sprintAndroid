@@ -52,13 +52,30 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		case R.id.menu_scan:
 			startScanner();
 			return true;
-
+		case R.id.menu_refresh:
+			refreshList();
 
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
+	protected void refreshList() {
+		
+		Log.v("refreshList", "yo bro");
+		Log.v("refreshList", "["+this.getLocalClassName()+"]");
+		
+		int stupidJavaIsStupid = -1;
+		
+		if(this.getLocalClassName().contentEquals("JobListActivity")) {
+			
+		} else {
+			if(this.getLocalClassName().contentEquals("PrinterListActivity")) {
+				stupidJavaIsStupid = 1;
+			}
+		}
+	}
+	
 	protected void startScanner() {
 		Intent i = new Intent();	
 		/* setting the action string.  No other apps should respond to this request

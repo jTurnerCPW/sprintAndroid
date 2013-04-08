@@ -16,6 +16,13 @@ public class JobListActivity extends ABSFragmentActivity{
 		printerName = intent.getStringExtra("printer_name");
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		getSupportMenuInflater().inflate(R.menu.refreshable_sherlock, menu);
+		return true;
+	}
+	
 	public String getPrinterName() {
 		return printerName;
 	}

@@ -169,6 +169,11 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 		}
 	}
 	
+	private void refreshJobs() {
+		jobListFragment.refreshJobs();
+		notifyDataSetChanged();
+	}
+	
 	// Move and then Print the job id given
 	private void printJob(String jobId) {
 		MoveJobTask task = new MoveJobTask(jobListFragment, jobId);
