@@ -10,11 +10,16 @@
     <string name="pref_sprintUsername_summary">Please enter your username</string>
     <string name="jobs">Jobs</string>
     <string name="printers">Printers</string>
+    <string name="printer">Printer</string>
     <string name="scanner">Scanner</string>
     <string name="job_name">Job Name</string>
     <string name="job_user">Job User</string>
+    <string name="printer_name">Printer Name</string>
+    <string name="printer_location">Location</string>
     <string name="file_type">File Type</string>
     <string name="type_to_filter">type to filter</string>
+    <string name="printer_filter">Search for Printer</string>
+    <string name="job_filter">Search for Job</string>
     <string name="confirm">OK</string>
     <string name="cancel">Cancel</string>
     
