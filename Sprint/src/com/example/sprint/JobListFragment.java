@@ -104,14 +104,7 @@ public class JobListFragment extends Fragment{
 	
 	public void refreshJobs() {
 		
-		// Get all jobs
-		getJobs();
-
-		searchText = (EditText) view.findViewById(R.id.etSearchJob);
-		searchText.addTextChangedListener(filterTextWatcher);
-
-		jobListView = (ListView) view.findViewById(R.id.lvJob);
-		jobListView.setAdapter(adapter);	
+		onResume();	
 	}
 
 }
