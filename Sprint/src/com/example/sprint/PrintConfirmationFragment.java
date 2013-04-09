@@ -8,10 +8,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class PrintConfirmationFragment extends Fragment implements OnClickListener{
 
-	private LinearLayout view;
+	private RelativeLayout view;
 	private Button bCancel;
 	private Button bPrint;
 	
@@ -19,7 +20,7 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		view = (LinearLayout) inflater.inflate(R.layout.fragment_print_confirmation, container, false);
+		view = (RelativeLayout) inflater.inflate(R.layout.fragment_print_confirmation, container, false);
 		bCancel = (Button) view.findViewById(R.id.bCancel);
 		bCancel.setOnClickListener(this);
 		bPrint = (Button) view.findViewById(R.id.bPrint);
