@@ -34,7 +34,7 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 		
 		case R.id.bCancel:
 			//  Don't print the job.  Go back
-			getActivity().finish();
+			goBackToJobs();
 			break;
 		case R.id.bPrint:
 			// Print the job.
@@ -47,8 +47,13 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 	}
 	
 	// Move and then Print the job id given
-		private void printJob(String jobId) {
-			MoveJobTask task = new MoveJobTask(this, jobId);
-			task.execute(getActivity());
-		}
+	private void printJob(String jobId) {
+		MoveJobTask task = new MoveJobTask(this, jobId);
+		task.execute(getActivity());
+	}
+	
+	// Move and then Print the job id given
+	public void goBackToJobs() {
+		getActivity().finish();
+	}
 }

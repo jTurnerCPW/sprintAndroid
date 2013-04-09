@@ -92,7 +92,10 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
-			// GOOD
+			// Toast that it printed
+			Toast.makeText(PrintConfirmationFragment.getActivity(), 
+					"Your job has been sent to the printer!", Toast.LENGTH_LONG).show();
+			PrintConfirmationFragment.goBackToJobs();
 		}
 		else
 		{
