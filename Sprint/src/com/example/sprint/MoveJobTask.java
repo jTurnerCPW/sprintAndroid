@@ -93,8 +93,8 @@ public class MoveJobTask extends AsyncTask<Context, Void, String> {
 		if(result.equals("Success"))
 		{
 			// Print the Job
-			PrintJobTask task = new PrintJobTask(printConfirmationFragment, jobId);
-			task.execute(printConfirmationFragment.getActivity());
+			//PrintJobTask task = new PrintJobTask(printConfirmationFragment, jobId);
+			//task.execute(printConfirmationFragment.getActivity());
 		}
 		else
 		{

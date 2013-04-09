@@ -3,7 +3,9 @@ package com.example.sprint;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,6 +60,16 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             	
             }
         });
+		
+		ImageButton imageButton = (ImageButton) convertView.findViewById(R.id.btnDeleteJob);
+		imageButton.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View arg0) { 
+				cancelJobAlert(jobListFiltered.get(position).getId());
+			}
+		});
+		
 		/* Get the job object from the filtered list position*/
 		Job job = jobListFiltered.get(position);
 
@@ -164,10 +177,32 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 			}
 		}
 	}
-	
+
 	// Cancel the job id given
 	private void cancelJob(String jobId) {
 		CancelJobTask task = new CancelJobTask(jobListFragment, jobId);
 		task.execute(this.getContext());
+	}
+	
+	private void cancelJobAlert(String job_id) {
+		final String jobId = job_id;
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Cancel Job");
+        builder.setMessage("Are you sure you want to cancel this job?");
+        builder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    	cancelJob(jobId);
+                        dialog.cancel();
+                    }
+                });
+        builder.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder.show();
 	}
 }
