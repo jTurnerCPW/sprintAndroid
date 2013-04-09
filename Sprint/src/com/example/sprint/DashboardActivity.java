@@ -42,14 +42,14 @@ public class DashboardActivity  extends ABSFragmentActivity {
 			displayUserNameAlert();
 		}
 
-		if( hazTehWifiz() == false) {
+		if( isConnectedViaWifi() == false) {
 
 			createNetworkDisabledAlert();
 		}
 		
 	}
 
-	private boolean hazTehWifiz() {
+	private boolean isConnectedViaWifi() {
 
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
