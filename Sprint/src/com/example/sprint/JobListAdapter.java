@@ -151,7 +151,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 				for (Job j : jobListOriginal) {
 					/* Compare the upper-case of the printer name with the text input */
 					if (j.getName().toUpperCase(Locale.getDefault())
-							.startsWith(constraint.toString().toUpperCase(Locale.getDefault()))) {
+							.contains(constraint.toString().toUpperCase(Locale.getDefault()))) {
 						/* Add to the new filtered printer list */
 						nJobList.add(j);
 					}
