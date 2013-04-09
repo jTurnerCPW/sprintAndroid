@@ -26,13 +26,11 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 	
 	// Constructor for the PrinterListJSONTask
 	public PrinterListJSONTask(PrinterListFragment printerListFragment) {
-		Log.v("PrinterListJSONTask", "constructor");
 		this.printerListFragment = printerListFragment;
 	}
 	
 	@Override
 	protected ArrayList<Printer> doInBackground(Context... params) {
-		Log.v("PrinterListJSONTask", "background");
 		try{
 		    // Create a new HTTP Client and setup the GET
 		    DefaultHttpClient defaultClient = new DefaultHttpClient();

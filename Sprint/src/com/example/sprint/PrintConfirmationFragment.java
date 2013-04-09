@@ -2,13 +2,15 @@ package com.example.sprint;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class PrintConfirmationFragment extends Fragment implements OnClickListener{
 
@@ -25,8 +27,23 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 		bCancel.setOnClickListener(this);
 		bPrint = (Button) view.findViewById(R.id.bPrint);
 		bPrint.setOnClickListener(this);
+		
+		// Get the text views
+		TextView tvJobName = (TextView)view.findViewById(R.id.tvJobName);
+		TextView tvPrinterName = (TextView)view.findViewById(R.id.tvPrinterName);
+		
+		// String values
+		String jobName = ((PrintConfirmationActivity)this.getActivity()).getJobName();
+		String printerName = ((PrintConfirmationActivity)this.getActivity()).getPrinterName();
+		
+		// Set the values
+		tvJobName.setText(jobName);
+		tvPrinterName.setText(printerName);
+
 		return view;
 	}
+
+
 
 	@Override
 	public void onClick(View v) {

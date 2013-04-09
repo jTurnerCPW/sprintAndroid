@@ -56,6 +56,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             	Intent intent = new Intent(context, PrintConfirmationActivity.class);
         		intent.putExtra("printer_name", ((JobListActivity)jobListFragment.getActivity()).getPrinterName());
         		intent.putExtra("job_id", jobListFiltered.get(position).getId());
+        		intent.putExtra("job_name", jobListFiltered.get(position).getName());
         		context.startActivity(intent);
             	
             }

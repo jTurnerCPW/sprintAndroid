@@ -11,7 +11,7 @@ public class SprintApplication extends Application{
 	public static int compuwareCheck;
 	
     public void onCreate() {
-    	compuwareCheck = CompuwareUEM.startup(this , "Sprint", "http://10.24.16.122:8080/", true, null);
+    	compuwareCheck = CompuwareUEM.startup(this , "Sprint Android", "http://10.24.16.122:8080/", true, null);
     }
     
     public static void memCheck(Context context) {

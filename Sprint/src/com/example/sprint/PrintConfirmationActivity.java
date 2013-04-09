@@ -7,14 +7,19 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 
 	private String printerName;
 	private String jobId;
+	private String jobName;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_print_confirmation);
+		
 		Intent intent = getIntent();
 		printerName = intent.getStringExtra("printer_name");
 		jobId = intent.getStringExtra("job_id");
+		jobName = intent.getStringExtra("job_name");
+		
+		setContentView(R.layout.activity_print_confirmation);		
 	}
 	
 	public String getPrinterName() {
@@ -23,6 +28,10 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 	
 	public String getJobId() {
 		return jobId;
+	}
+	
+	public String getJobName() {
+		return jobName;
 	}
 
 }
