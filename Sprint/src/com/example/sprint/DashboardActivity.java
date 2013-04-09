@@ -55,9 +55,13 @@ public class DashboardActivity  extends ABSFragmentActivity {
 
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		
+		//check and see first if the network has connectivity at all.  
 		if (networkInfo != null && networkInfo.isConnected()) {
 
 			ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+			
+			//next if the phone has connectivity, make sure it is connected via wi-fi
 			if( ! cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting() ) {
 
 				//there is a connection but it is not wifi...
