@@ -12,6 +12,7 @@
     <string name="jobs">Jobs</string>
     <string name="printers">Printers</string>
     <string name="printer">Printer</string>
+    <string name="print">Print</string>
     <string name="scanner">Scanner</string>
     <string name="job_name">Job Name</string>
     <string name="job_user">Job User</string>
