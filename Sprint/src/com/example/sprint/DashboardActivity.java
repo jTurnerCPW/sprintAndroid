@@ -47,8 +47,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
 			createNetworkDisabledAlert();
 		}
 		
-		//DynaTrace all the things!! (but today just how long the user is at the dashboard before picking something to do)
-		CompuwareUEM.enterAction("scannerActivity");
 	}
 
 	private boolean hazTehWifiz() {

@@ -43,8 +43,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 
 		case android.R.id.home:
 			goHome();
-			return true;
-			
+			return true;			
 		case R.id.menu_settings:
 			startPreferences();
 			return true;
@@ -70,7 +69,6 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		i.setAction("com.compuware.pdp.sprint");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);	
-		finish();
 	}
 
 	protected boolean startPreferences() {
@@ -95,7 +93,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.v("ABS", "request code: " + requestCode);
-    	if(requestCode == BARCODE_SCAN_REQUEST && resultCode == RESULT_OK) {
+    	if(resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
     		
     		//dynaTrace End Scanner
@@ -105,8 +103,6 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
     	}
 	}
 	
-	
-
 	protected void startJobListActivity(String printerName) {
 		Intent intent = new Intent(this, JobListActivity.class);
 		intent.putExtra("printer_name", printerName);
