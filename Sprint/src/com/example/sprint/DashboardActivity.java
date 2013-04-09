@@ -5,6 +5,7 @@ import com.compuware.apm.uem.mobile.android.CompuwareUEM;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -13,6 +14,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +22,8 @@ import android.widget.EditText;
 public class DashboardActivity  extends ABSFragmentActivity {
 	private static final int EDIT_ID = Menu.FIRST+2;
 	private final static int BARCODE_SCAN_REQUEST = 2345;
+	private int dialogsShowing = 0;
+	String user_name;
 
 	
     @Override
@@ -33,23 +37,35 @@ public class DashboardActivity  extends ABSFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		String user_name = prefs.getString(getResources().getString(R.string.pref_sprintUsername_key), "");
+		
+		//TODO: insert some checks to see if there are dialogs up already
+		Log.v("dialogCountResume", "" + dialogsShowing);
+		
+		//check the username and password to see if they have been set correctly
+		checkUsrname();
+		checkWifi();
+	}
 
-		/* if the username is "" */
-		if (user_name.length()==0){
+	private void checkUsrname() {
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		user_name = prefs.getString(getResources().getString(R.string.pref_sprintUsername_key), "");
+		
+		if (user_name.length()==0 && dialogsShowing == 0){
 
 			displayUserNameAlert();
-		}
-
-		if( hazTehWifiz() == false) {
+		}	
+	}
+	
+	private void checkWifi() {
+		
+		if( isConnectedViaWifi() == false && dialogsShowing == 0) {
 
 			createNetworkDisabledAlert();
 		}
-		
 	}
-
-	private boolean hazTehWifiz() {
+	
+	private boolean isConnectedViaWifi() {
 
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -80,20 +96,42 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(
 				"Your wi-fi connection is not active!  You will need to connect to the Compuware network to use Sprint.  ")
-				.setCancelable(false)
+				.setCancelable(true)
 				.setPositiveButton("Enable Wi-Fi",
 						new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
+
 						showNetworkOptions();
+						dialog.cancel();
 					}
 				});
 		builder.setNegativeButton("Cancel",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
+				//Canceled.
+				
+				//TODO: FOLLOW HAN INTO THE TRASH COMPACTOR.  
+				//really, chewy, cancel calls dismiss.  its okay. 
+				//dialogsShowing--;
+				//Log.v("dialogCountNetCan", "" + dialogsShowing);
+				
 				dialog.cancel();
 			}
 		});
 		AlertDialog alert = builder.create();
+		
+		//update the count of displaying dialogs back down to 0 when this dialog is dismissed or canceled.  
+		alert.setOnDismissListener(new OnDismissListener() {
+			public void onDismiss(final DialogInterface dialog){
+				
+				dialogsShowing--;
+				Log.v("dialogCountNetDis", "" + dialogsShowing);
+				checkUsrname();	
+			}
+		});
+		
+		dialogsShowing++;
+		Log.v("dialogCountNetShow", "" + dialogsShowing);
 		alert.show();
 	}
 
@@ -102,19 +140,21 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		Intent i = new Intent(android.provider.Settings.ACTION_SETTINGS);
 		startActivityForResult(i, 5);
 	}
+	
+	
 
 	private void displayUserNameAlert() {
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		alert.setTitle(getResources().getString(R.string.pref_sprintUsername_Title));
-		alert.setMessage(getResources().getString(R.string.pref_sprintUsername_summary));
+		builder.setTitle(getResources().getString(R.string.pref_sprintUsername_Title));
+		builder.setMessage(getResources().getString(R.string.pref_sprintUsername_summary));
 
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(this);
 		input.setHint(R.string.sprintUsername_hint);
-		alert.setView(input);
+		builder.setView(input);
 
-		alert.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String value = input.getText().toString();
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -124,14 +164,32 @@ public class DashboardActivity  extends ABSFragmentActivity {
 			}
 		});
 
-		alert.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
+				
+				//TODO: FOLLOW HAN INTO THE TRASH COMPACTOR.  
+				//really, chewy, cancel calls dismiss.  its okay. 
+				//dialogsShowing--;
+				//Log.v("dialogCountUsrCan", "" + dialogsShowing);
+				
+				dialog.cancel();
 			}
 		});
-
+		AlertDialog alert = builder.create();
+		
+		alert.setOnDismissListener(new OnDismissListener() {
+			public void onDismiss(final DialogInterface dialog){
+				
+				dialogsShowing--;
+				Log.v("dialogCountUsrDis", "" + dialogsShowing);
+				checkWifi();
+			}
+		});
+		
+		dialogsShowing++;
+		Log.v("dialogCountUsrShow", "" + dialogsShowing);
 		alert.show();
-
 	}
 
 	public void startScanner(View view) {
