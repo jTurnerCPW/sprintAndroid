@@ -6,6 +6,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,9 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 	private LayoutInflater inflater;
 	private Context context;
 	private Filter filter;
+	private int recentPrinterCount=0;
+	private int listCounter=0;
+	private ArrayList<Printer> recentPrinters;
 	private ArrayList<Printer> printerListOriginal;
 	private ArrayList<Printer> printerListFiltered;
 
@@ -30,8 +34,20 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 	public PrinterListAdapter(Context ctx, int resourceId,
 			ArrayList<Printer> printers) {
 		super(ctx, resourceId, printers);
-		printerListOriginal = printers;
-		printerListFiltered = new ArrayList<Printer>(printers);
+		
+		//get Recent Printers
+		printerListOriginal= new ArrayList<Printer>();
+		printerListFiltered = new ArrayList<Printer>();
+		recentPrinters= new ArrayList<Printer>();
+		recentPrinters.add(new Printer("Kim","Kim",false));
+		recentPrinterCount = recentPrinters.size();
+		
+		printerListOriginal.addAll(recentPrinters);
+		printerListOriginal.addAll(printers);
+		printerListFiltered.addAll(recentPrinters);
+		printerListFiltered.addAll(printers);
+		
+		//printerListFiltered = new ArrayList<Printer>(printers);
 		resource = resourceId;
 		inflater = LayoutInflater.from(ctx);
 		context = ctx;
@@ -52,7 +68,34 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
         		context.startActivity(intent);
             }
         });
+		
+		
+		TextView separator = (TextView) convertView.findViewById(R.id.separator);
+		
+		separator.setVisibility(View.GONE);
+		
+		//Log.e("APP", ""+listCounter+" "+recentPrinterCount);
+		//separator.setVisibility(View.GONE);
+		/*
+		if(listCounter==0)
+		{
+			//Log.v("APP", "=0");
+			TextView separator = (TextView) convertView.findViewById(R.id.separator);
+			
+			separator.setText("Recent Printers");
+			separator.setVisibility(View.VISIBLE);
+		}
+		else if(listCounter == recentPrinterCount)
+		{
 
+			Log.v("APP", "=recent printers");
+			TextView separator = (TextView) convertView.findViewById(R.id.separator);
+			
+			separator.setText("All Printers");
+			separator.setVisibility(View.VISIBLE);
+		}
+		listCounter++;
+		*/
 		/* Get the printer object from the filtered list position*/
 		Printer printer = printerListFiltered.get(position);
 

@@ -8,9 +8,10 @@ import android.content.Context;
 import android.util.Log;
 
 public class SprintApplication extends Application{
+	public static int compuwareCheck;
 	
     public void onCreate() {
-		CompuwareUEM.startup(this , "com.example.sprint", "http://10.24.16.122:9998/", true, null);
+    	compuwareCheck = CompuwareUEM.startup(this , "Sprint", "http://10.24.16.122:8080/", true, null);
     }
     
     public static void memCheck(Context context) {
@@ -28,5 +29,5 @@ public class SprintApplication extends Application{
 		CompuwareUEM.shutdown();
 		super.onTerminate();
 	}
-	
+
 }

@@ -3,18 +3,28 @@
     android:layout_width="fill_parent"
     android:layout_height="80dip"
     android:clickable="true" >
-
+	<TextView
+        android:id="@+id/separator"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+         />
     <ImageView
         android:id="@+id/imgPrinter"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:contentDescription="@string/printer"
+        
+        android:layout_below="@id/separator"
         android:src="@drawable/printer_icon" />
 
     <LinearLayout
+        android:id="@+id/printlisttext"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imgPrinter"
+        android:layout_below="@id/separator"
         android:orientation="vertical"
         android:paddingLeft="10sp" >
 
