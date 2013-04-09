@@ -9,14 +9,9 @@ import android.util.Log;
 
 public class SprintApplication extends Application{
 	public static int compuwareCheck;
-	public static int enterCheck;
-	public static int leaveCheck;
 	
     public void onCreate() {
     	compuwareCheck = CompuwareUEM.startup(this , "Sprint", "http://10.24.16.122:8080/", true, null);
-    	
-    	enterCheck = CompuwareUEM.enterAction("Sprint Application");
-    	leaveCheck = CompuwareUEM.leaveAction("Sprint Application");
     }
     
     public static void memCheck(Context context) {
