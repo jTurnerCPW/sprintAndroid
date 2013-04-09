@@ -21,7 +21,7 @@ public class PrinterListActivity extends ABSFragmentActivity{
 	@Override
 	public void refreshList(){
 		PrinterListFragment plfrag = (PrinterListFragment)getSupportFragmentManager().findFragmentById(R.id.pl_fragment);
-		plfrag.refreshJobs();
+		plfrag.refreshPrinters();
 	}
 
 }

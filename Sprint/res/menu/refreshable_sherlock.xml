@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+	    android:id="@+id/menu_refresh"
+	    android:showAsAction="always"
+	    android:title=""
+	    android:icon="@drawable/default_ptr_rotate"/>
+    <item
         android:id="@+id/menu_scan"
         android:showAsAction="ifRoom"
         android:title="@string/action_scan"/>
@@ -9,8 +14,4 @@
         android:id="@+id/menu_settings"
         android:showAsAction="ifRoom"
         android:title="@string/action_settings"/>
-	<item
-	    android:id="@+id/menu_refresh"
-	    android:showAsAction="ifRoom"
-	    android:title="@string/action_refresh"/>
 </menu>
