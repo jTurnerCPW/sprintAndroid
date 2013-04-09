@@ -122,7 +122,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 				for (Printer p : printerListOriginal) {
 					/* Compare the upper-case of the printer name with the text input */
 					if (p.getName().toUpperCase(Locale.getDefault())
-							.startsWith(constraint.toString().toUpperCase(Locale.getDefault()))) {
+							.contains(constraint.toString().toUpperCase(Locale.getDefault()))) {
 						/* Add to the new filtered printer list */
 						nPrinterList.add(p);
 					}

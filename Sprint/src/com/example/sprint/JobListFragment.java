@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,6 @@ public class JobListFragment extends Fragment{
 
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
-			Log.v("JobListActivity", "onTextChanged");
 			adapter.getFilter().filter(s);
 		}
 

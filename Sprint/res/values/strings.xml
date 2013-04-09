@@ -23,7 +23,7 @@
     <string name="job_filter">Search for Job</string>
     <string name="confirm">OK</string>
     <string name="cancel">Cancel</string>
-    
+    <string name="delete">Delete</string>
     <string name="action_scan">Scan</string>
     <string name="action_printers">Printer List</string>
     <string name="action_refresh">Refresh List</string>
