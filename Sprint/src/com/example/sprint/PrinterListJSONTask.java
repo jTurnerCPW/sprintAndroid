@@ -92,6 +92,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 		pd.dismiss();
 		
 		//Done DynaTracing the printer list populate
+		printerListFragment.notifyPrinterLoadComplete();
 		CompuwareUEM.leaveAction("printerListPopulate");
 	}
 	

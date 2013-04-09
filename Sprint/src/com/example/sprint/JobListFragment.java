@@ -2,7 +2,12 @@ package com.example.sprint;
 
 import java.util.ArrayList;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,11 +20,12 @@ import android.widget.ListView;
 
 public class JobListFragment extends Fragment{
 	
-	private ListView jobListView;
+	private PullToRefreshListView jobListView;
 	private EditText searchText;
 	private LinearLayout view;
 	private JobListAdapter adapter = null;
 	private ArrayList<Job> jobs;
+	private Handler mHandler = new Handler();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,8 +61,23 @@ public class JobListFragment extends Fragment{
 		searchText = (EditText) view.findViewById(R.id.etSearchJob);
 		searchText.addTextChangedListener(filterTextWatcher);
 		
-		jobListView = (ListView) view.findViewById(R.id.lvJob);
-		jobListView.setAdapter(adapter);		
+		jobListView = (PullToRefreshListView) view.findViewById(R.id.lvJob);
+		jobListView.setAdapter(adapter);
+		
+		jobListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(final PullToRefreshBase<ListView> lv) {
+
+				mHandler.postDelayed(new Runnable() {
+
+					@Override
+					public void run() {
+						refreshJobs();
+					}
+				},0);
+			}
+		});
 	}
 	
 	public void getJobs() {	
@@ -105,4 +126,8 @@ public class JobListFragment extends Fragment{
 		getJobs();
 	}
 
+	public void notifyJobLoadComplete() {
+		
+		jobListView.onRefreshComplete();
+	}
 }

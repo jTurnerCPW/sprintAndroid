@@ -113,6 +113,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 		pd.dismiss();
 		
 		/*  Stop dynaTrace monitoring of jobListJSONTask */
+		jobListFragment.notifyJobLoadComplete();
 		CompuwareUEM.leaveAction("jobListJSONTask");
 	}
 	
