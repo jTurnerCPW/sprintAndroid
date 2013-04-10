@@ -31,8 +31,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
         super.onCreate(savedInstanceState);       
         setContentView(R.layout.dashboard); 
     }
-    
-    
 
 	@Override
 	protected void onResume() {
@@ -141,8 +139,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		startActivityForResult(i, 5);
 	}
 	
-	
-
 	private void displayUserNameAlert() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

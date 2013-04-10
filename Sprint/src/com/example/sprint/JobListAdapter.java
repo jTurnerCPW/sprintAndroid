@@ -52,13 +52,23 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             @Override
             public void onClick(View v) {
             	
-                // Start the confirmation activity            	
-            	Intent intent = new Intent(context, PrintConfirmationActivity.class);
-        		intent.putExtra("printer_name", ((JobListActivity)jobListFragment.getActivity()).getPrinterName());
-        		intent.putExtra("job_id", jobListFiltered.get(position).getId());
-        		intent.putExtra("job_name", jobListFiltered.get(position).getName());
-        		context.startActivity(intent);
-            	
+            	// If we don't have the printer yet go to the printer selection
+            	if(((JobListActivity)context).getPrinterName() == null)
+            	{
+            		Intent intent = new Intent(context, PrinterListActivity.class);
+            		intent.putExtra("job_id", jobListFiltered.get(position).getId());
+            		intent.putExtra("job_name", jobListFiltered.get(position).getName());
+            		context.startActivity(intent);
+            	}
+            	else
+            	{
+            		// Start the confirmation activity            	
+                	Intent intent = new Intent(context, PrintConfirmationActivity.class);
+            		intent.putExtra("printer_name", ((JobListActivity)context).getPrinterName());
+            		intent.putExtra("job_id", jobListFiltered.get(position).getId());
+            		intent.putExtra("job_name", jobListFiltered.get(position).getName());
+            		context.startActivity(intent);
+            	}	
             }
         });
 		
