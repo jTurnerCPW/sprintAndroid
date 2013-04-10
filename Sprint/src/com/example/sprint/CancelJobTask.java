@@ -65,7 +65,6 @@ public class CancelJobTask extends AsyncTask<Context, Void, String> {
 			    // Check if the printing of the job was successful
 		    	if(results.equals("0"))
 		    	{
-		    		Thread.sleep(3000);
 		    		return "Success";
 		    	}
 		    	else
