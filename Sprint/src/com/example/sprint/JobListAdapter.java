@@ -100,20 +100,47 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 
 		String jobType = job.getType();		
 		String uri = "";
-		if(jobType.equals("doc") || jobType.equals("txt")) {
-			uri = "drawable/worddoc";
+		
+		//this will happen if CUPS is not identifying the filetype
+		if(jobType.equals("unknown")) {
+			uri = "drawable/text";
 		}
+		
+		//text files
+		else if(jobType.equals("doc") || jobType.equals("docx") || jobType.equals("txt") || jobType.equals("rtf") || jobType.equals("odf")  || jobType.equals("gdoc")) {
+			uri = "drawable/text";
+		}
+		//pdf
 		else if(jobType.equals("pdf")) {
 			uri = "drawable/pdfdoc";
 		}
-		else if(jobType.equals("xls")) {
-			uri = "drawable/exceldoc";
+		//spreadsheets
+		else if(jobType.equals("xls")  || jobType.equals("xlsx") || jobType.equals("csv") || jobType.equals("numbers") || jobType.equals("ods") || jobType.equals("gsheet")) {
+			uri = "drawable/spreadsheet";
 		}
-		else if(jobType.equals("ppt")) {
-			uri = "drawable/pptdoc";
+		//presentations
+		else if(jobType.equals("ppt") || jobType.equals("pptx") || jobType.equals("pps") || jobType.equals("key") || jobType.equals("keynote") || jobType.equals("gslides")) {
+			uri = "drawable/presentation";
 		}
+		//web docs
+		else if(jobType.equals("asp") || jobType.equals("aspx") || jobType.equals("htm") || jobType.equals("html") || jobType.equals("js") || jobType.equals("jsp") ||
+				jobType.equals("php") || jobType.equals("rss") || jobType.equals("xml") || jobType.equals("xhtml") || jobType.equals("xaml")) {
+			uri = "drawable/web";
+		}
+		//code files >:(
+		else if(jobType.equals("c") || jobType.equals("class") || jobType.equals("cpp") || jobType.equals("cs") || jobType.equals("h") || jobType.equals("java") ||
+				jobType.equals("m") || jobType.equals("pl") || jobType.equals("py") || jobType.equals("sh")) {
+			uri = "drawable/code";
+		}
+		//some images...
+		else if(jobType.equals("ai") || jobType.equals("svg") || jobType.equals("tiff") || jobType.equals("tif") || jobType.equals("tga") || jobType.equals("pspimage") ||
+				jobType.equals("psd") || jobType.equals("png") || jobType.equals("jpg") || jobType.equals("gif") || jobType.equals("bmp") || jobType.equals("jpg") ||
+				jobType.equals("jpeg") || jobType.equals("xcf")) {
+			
+		}
+		//fall back on generic text icon
 		else {
-			uri = "drawable/worddoc";
+			uri = "drawable/text";
 		}
 		
 		int imageResource = context.getResources().getIdentifier(uri, null,
