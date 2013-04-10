@@ -4,7 +4,6 @@ import com.compuware.apm.uem.mobile.android.CompuwareUEM;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,7 +28,7 @@ public class DashboardFragment extends Fragment implements OnItemClickListener{
     static final LauncherIcon[] ICONS = {
     	new LauncherIcon(R.drawable.dash_scan, "Scan Printer QR Code", "qrbypdpicon.png"),
     	new LauncherIcon(R.drawable.dash_print,"Select Printer", "color_printer.png"),
-        new LauncherIcon(R.drawable.dash_pref, "User Preferences", "preferences_icon.png")
+        new LauncherIcon(R.drawable.jobs, "Select Job", "jobs.png")
     };
     
 	@Override
@@ -53,9 +52,7 @@ public class DashboardFragment extends Fragment implements OnItemClickListener{
         });
         
 		return view;
-	}
-	
-	
+	}	
 	
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -79,17 +76,8 @@ public class DashboardFragment extends Fragment implements OnItemClickListener{
 		}   
 		else if(position == 2)
 		{
-			if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
-				startActivity(new Intent(getActivity(), EditPreferences.class));
-				
-			}
-			else {
-				Intent intent = new Intent( getActivity(), EditPreferencesHC.class );
-				/* Adding extras to skip showing headers in the preference activity */
-				intent.putExtra( EditPreferencesHC.EXTRA_SHOW_FRAGMENT, StockPreferenceFragment.class.getName() );
-				intent.putExtra( EditPreferencesHC.EXTRA_NO_HEADERS, true );
-				startActivity(intent);
-			}
+			Intent intent = new Intent(getActivity(), JobListActivity.class);
+			startActivity(intent);
 		}   
 		
     }
