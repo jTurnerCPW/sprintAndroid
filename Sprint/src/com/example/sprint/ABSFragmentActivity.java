@@ -68,7 +68,10 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		 */
 		i.setAction("com.compuware.pdp.sprint");
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(i, BARCODE_SCAN_REQUEST);	
+		startActivityForResult(i, BARCODE_SCAN_REQUEST);
+		
+		// dynaTrace Metric for scanning
+		CompuwareUEM.enterAction("scannerActivity");
 	}
 
 	protected boolean startPreferences() {
@@ -87,20 +90,6 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 			return true;
 		}
 		
-	}
-	
-	@Override 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		Log.v("ABS", "request code: " + requestCode);
-    	if(resultCode == RESULT_OK) {
-    		String contents = data.getStringExtra("SCAN_RESULT");
-    		
-    		//dynaTrace End Scanner
-    		CompuwareUEM.leaveAction("scannerActivity");
-    		
-    		startJobListActivity(contents);
-    	}
 	}
 	
 	protected void startJobListActivity(String printerName) {

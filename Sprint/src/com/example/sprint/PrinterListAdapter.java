@@ -6,7 +6,6 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,10 +61,25 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
             @Override
             public void onClick(View v) {
-            	// When a printer is clicked show the job list and send the printer selected
-                Intent intent = new Intent(context, JobListActivity.class);
-        		intent.putExtra("printer_name", printerListFiltered.get(position).getName());
-        		context.startActivity(intent);
+
+            	// If we don't have the job yet go to the job selection
+            	if(((PrinterListActivity)context).getJobId() == null)
+            	{
+            		// When a printer is clicked show the job list and send the printer selected
+                    Intent intent = new Intent(context, JobListActivity.class);
+            		intent.putExtra("printer_name", printerListFiltered.get(position).getName());
+            		context.startActivity(intent);
+            	}
+            	else
+            	{
+            		// Start the confirmation activity            	
+                	Intent intent = new Intent(context, PrintConfirmationActivity.class);
+                	intent.putExtra("printer_name", printerListFiltered.get(position).getName());
+            		intent.putExtra("job_id", ((PrinterListActivity)context).getJobId());
+            		intent.putExtra("job_name", ((PrinterListActivity)context).getJobName());
+            		context.startActivity(intent);
+            	}
+            	
             }
         });
 		

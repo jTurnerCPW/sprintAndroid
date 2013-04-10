@@ -21,7 +21,6 @@ import android.widget.EditText;
 
 public class DashboardActivity  extends ABSFragmentActivity {
 	private static final int EDIT_ID = Menu.FIRST+2;
-	private final static int BARCODE_SCAN_REQUEST = 2345;
 	private int dialogsShowing = 0;
 	String user_name;
 
@@ -31,8 +30,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
         super.onCreate(savedInstanceState);       
         setContentView(R.layout.dashboard); 
     }
-    
-    
 
 	@Override
 	protected void onResume() {
@@ -141,8 +138,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		startActivityForResult(i, 5);
 	}
 	
-	
-
 	private void displayUserNameAlert() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -192,21 +187,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		alert.show();
 	}
 
-	public void startScanner(View view) {
-
-		Intent i = new Intent();	
-		/* setting the action string.  No other apps should respond to this request
-		 * because of the unique action string
-		 */
-		i.setAction("com.compuware.pdp.sprint");
-		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(i, BARCODE_SCAN_REQUEST);
-		
-		//dynaTrace Metric for scanning
-		CompuwareUEM.enterAction("scannerActivity");
-	}
-
-
 	public boolean startPreferences(View view){
 		if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB) {
 			startActivity(new Intent(this, EditPreferences.class));
@@ -220,6 +200,20 @@ public class DashboardActivity  extends ABSFragmentActivity {
 			startActivity(intent);
 			return true;
 		}
+	}
+	
+	@Override 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.v("ABS", "request code: " + requestCode);
+    	if(resultCode == RESULT_OK) {
+    		String contents = data.getStringExtra("SCAN_RESULT");
+    		
+    		//dynaTrace End Scanner
+    		CompuwareUEM.leaveAction("scannerActivity");
+    		
+    		startJobListActivity(contents);
+    	}
 	}
 
 	public void startPrinterListActivity(View view){
