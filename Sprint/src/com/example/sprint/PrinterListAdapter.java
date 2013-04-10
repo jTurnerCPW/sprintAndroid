@@ -1,5 +1,10 @@
 package com.example.sprint;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -19,12 +24,12 @@ import android.widget.TextView;
 public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
 	// Variables
+	private String storageFileName = "sprintapp.txt";
 	private int resource;
 	private LayoutInflater inflater;
 	private Context context;
 	private Filter filter;
 	private int recentPrinterCount=0;
-	private int listCounter=0;
 	private ArrayList<Printer> recentPrinters;
 	private ArrayList<Printer> printerListOriginal;
 	private ArrayList<Printer> printerListFiltered;
@@ -37,8 +42,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		//get Recent Printers
 		printerListOriginal= new ArrayList<Printer>();
 		printerListFiltered = new ArrayList<Printer>();
-		recentPrinters= new ArrayList<Printer>();
-		recentPrinters.add(new Printer("Kim","Kim",false));
+		recentPrinters= getRecentPrintersArray();
+		
 		recentPrinterCount = recentPrinters.size();
 		
 		printerListOriginal.addAll(recentPrinters);
@@ -51,6 +56,115 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		inflater = LayoutInflater.from(ctx);
 		context = ctx;
 	}
+	
+	//Return printer list of recent printers.
+	public ArrayList<Printer> getRecentPrintersArray()
+	{
+		FileInputStream fis;
+		ArrayList<Printer> retVal=new ArrayList<Printer>();
+		String content="";
+		try 
+		{
+			//Create file, if exists gather all printers in a string.
+			File file = this.getContext().getFileStreamPath(storageFileName);
+			if(file.exists())
+			{
+				fis = this.getContext().openFileInput(storageFileName);
+				byte[] input = new byte[fis.available()];
+				while (fis.read(input) != -1 && fis.read(input)!=0) 
+				{
+					content += new String(input);
+				}
+			}
+		}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace(); 
+		}
+		//turn the string into an array list of printers, returns recent printers
+		String[] printers = content.split(";");
+		for(int i=0;i<printers.length&& printers[i]!="";i++)
+		{
+			retVal.add(new Printer(printers[i],"",false));
+		}
+		return retVal;
+	}
+	
+	//Return concatenated list of recent printers. Separated by ';'
+	public String getRecentPrinters()
+	{
+		FileInputStream fis;
+		String content = "";
+		 
+		try 
+		{
+			//Create file & if it exists return the recent printers
+			File file = this.getContext().getFileStreamPath(storageFileName);
+			if(file.exists())
+			{
+				fis = this.getContext().openFileInput(storageFileName);
+				byte[] input = new byte[fis.available()];
+				while (fis.read(input) != -1 && fis.read(input)!=0) 
+				{
+					content += new String(input);
+				}
+			}
+		}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace(); 
+		}
+		return content;
+	}
+	
+	/*Add printer name to internal storage file*/	
+	public void saveToRecentPrinter(String name)
+	{
+		 FileOutputStream fos;
+		 String printerList = getRecentPrinters();
+		//Get Current recent list
+		 String[] printers = printerList.split(";");
+		
+		 //printer not already a recent, so add.
+		 if(!printerList.contains(name))
+		 {
+			 String content=name+";";
+			 //iterate through 4 or less printers then add new one to make 5.
+			 int length = 4;
+			 if(printers.length<4)
+			 {
+				 length = printers.length;
+			 }	
+			 for(int i=0;i<length&&printers[i]!="";i++)
+			 {
+				 content+=printers[i]+";";
+			 }
+			 try 
+			 {	
+				 fos = context.openFileOutput(storageFileName, Context.MODE_PRIVATE);
+				 fos.write(content.getBytes());
+				 fos.close();
+			 }
+			 catch (FileNotFoundException e) 
+			 {
+			     // TODO Auto-generated catch block
+			     e.printStackTrace();
+			 }
+			 catch (IOException e) 
+			 {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			 }
+		 }
+	}
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -61,7 +175,10 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
             @Override
             public void onClick(View v) {
-
+            	
+            	// Save the printer tapped to the recent printers
+            	saveToRecentPrinter(printerListFiltered.get(position).getName());
+            	
             	// If we don't have the job yet go to the job selection
             	if(((PrinterListActivity)context).getJobId() == null)
             	{
@@ -83,33 +200,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
             }
         });
 		
-		
-		TextView separator = (TextView) convertView.findViewById(R.id.separator);
-		
-		separator.setVisibility(View.GONE);
-		
-		//Log.e("APP", ""+listCounter+" "+recentPrinterCount);
-		//separator.setVisibility(View.GONE);
-		/*
-		if(listCounter==0)
-		{
-			//Log.v("APP", "=0");
-			TextView separator = (TextView) convertView.findViewById(R.id.separator);
-			
-			separator.setText("Recent Printers");
-			separator.setVisibility(View.VISIBLE);
-		}
-		else if(listCounter == recentPrinterCount)
-		{
-
-			Log.v("APP", "=recent printers");
-			TextView separator = (TextView) convertView.findViewById(R.id.separator);
-			
-			separator.setText("All Printers");
-			separator.setVisibility(View.VISIBLE);
-		}
-		listCounter++;
-		*/
 		/* Get the printer object from the filtered list position*/
 		Printer printer = printerListFiltered.get(position);
 
@@ -137,6 +227,26 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 				context.getPackageName());
 		Drawable image = context.getResources().getDrawable(imageResource);
 		imagePrinter.setImageDrawable(image);
+		
+		
+		int sectionHeaderVisible = View.GONE;
+		String sectionHeaderText ="";
+		
+		if(position==0 && recentPrinters.size()>0 && printerListFiltered.size() == printerListOriginal.size())
+		{
+			sectionHeaderVisible=View.VISIBLE;
+			sectionHeaderText ="Recent Printers";
+
+		}
+		else if(position == recentPrinterCount && printerListFiltered.size() == printerListOriginal.size())
+		{
+			sectionHeaderVisible=View.VISIBLE;
+			sectionHeaderText ="All Printers";
+		}
+
+		TextView separator = (TextView) convertView.findViewById(R.id.separator);
+		separator.setText(sectionHeaderText);
+		separator.setVisibility(sectionHeaderVisible);		
 
 		return convertView;
 	}

@@ -3,13 +3,18 @@
     android:layout_width="fill_parent"
     android:layout_height="80dip"
     android:clickable="true" >
+    
 	<TextView
         android:id="@+id/separator"
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="#F99C20"
+        android:padding="10dip"
+        android:layout_marginTop="10dip"
         android:textColor="@android:color/black"
          />
+	
     <ImageView
         android:id="@+id/imgPrinter"
         android:layout_width="60sp"
