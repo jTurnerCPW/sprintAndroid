@@ -8,7 +8,7 @@
         android:id="@+id/printerConfirm"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-		android:text="Print Details"
+		android:text="@string/print_details"
 		android:layout_marginBottom="10dip"
 		android:gravity="center" 
 		android:textSize="30dip"
@@ -18,7 +18,7 @@
         android:id="@+id/tvJobName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Job Name"
+        android:text="@string/job_name"
         android:gravity="center"
         android:layout_below="@id/printerConfirm"
         android:layout_marginTop="40dip"
@@ -26,6 +26,7 @@
    
     <ImageView
         android:id="@+id/imgPrinter"
+        android:contentDescription="@string/printer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,7 +37,7 @@
         android:id="@+id/tvPrinterName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Printer Name"
+        android:text="@string/printer_name"
         android:gravity="center" 
         android:layout_marginTop="25dip"
         android:layout_below="@id/imgPrinter" />
@@ -51,14 +52,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/bPrint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Print" />
+            android:text="@string/print" />
 
     </LinearLayout>
 
