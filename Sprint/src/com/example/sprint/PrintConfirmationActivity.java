@@ -22,6 +22,12 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 		setContentView(R.layout.activity_print_confirmation);		
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.confirmation_menu, menu);
+		return true;
+	}
+	
 	public String getPrinterName() {
 		return printerName;
 	}
