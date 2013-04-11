@@ -11,12 +11,19 @@
         android:hint="@string/job_filter"
         android:inputType="text"
         android:maxLines="1" />
-
+    
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/lvJob"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
+        android:layout_height="match_parent"
         ptr:ptrShowIndicator="false" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty_job_list" />
 
 </LinearLayout>

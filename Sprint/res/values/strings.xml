@@ -29,5 +29,6 @@
     <string name="print_details">Print Details</string>
     <string name="action_printers">Printer List</string>
     <string name="action_refresh">Refresh List</string>
+    <string name="empty_job_list">No documents to print...  Pull to refresh list.</string>
 
 </resources>

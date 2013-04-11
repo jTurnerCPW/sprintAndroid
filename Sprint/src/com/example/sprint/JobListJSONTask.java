@@ -121,7 +121,7 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 	protected void onPreExecute() {
 		
 		/*  Start dynaTrace monitoring of jobListJSONTask */
-		CompuwareUEM.enterAction("jobListJSONTask");
+		CompuwareUEM.enterAction("build");
 		
 		
 		// Clear the list and start a progress dialog for loading jobs

@@ -17,10 +17,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class JobListFragment extends Fragment{
 	
 	private PullToRefreshListView jobListView;
+	private TextView jobListEmptyTextView;
 	private EditText searchText;
 	private LinearLayout view;
 	private JobListAdapter adapter = null;
@@ -62,6 +64,10 @@ public class JobListFragment extends Fragment{
 		searchText.addTextChangedListener(filterTextWatcher);
 		
 		jobListView = (PullToRefreshListView) view.findViewById(R.id.lvJob);
+		//add the empty default view
+		jobListEmptyTextView = (TextView) view.findViewById(android.R.id.empty);
+		jobListView.setEmptyView(jobListEmptyTextView);
+		
 		jobListView.setAdapter(adapter);
 		
 		jobListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
