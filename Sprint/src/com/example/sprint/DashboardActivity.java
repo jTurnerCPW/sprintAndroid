@@ -230,6 +230,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
 	protected void goHome(){
 
 	}
-	public void onBackPressed() {
-	}
+	
+	// Disable back button
+	//	public void onBackPressed() {
+	//	}
 }
