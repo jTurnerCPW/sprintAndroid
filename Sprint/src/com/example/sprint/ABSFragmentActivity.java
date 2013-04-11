@@ -69,8 +69,8 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 		i.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		startActivityForResult(i, BARCODE_SCAN_REQUEST);
 		
-		// dynaTrace Metric for scanning
-		CompuwareUEM.enterAction("scannerActivity");
+		// Dynatrace Scanner Time Enter
+		CompuwareUEM.enterAction("Scan Time");
 	}
 
 	protected boolean startPreferences() {

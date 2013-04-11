@@ -88,16 +88,16 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, ArrayList<Prin
 		printerListFragment.setPrinters(printers);
 		printerListFragment.showList();
 		pd.dismiss();
-		
-		//Done DynaTracing the printer list populate
 		printerListFragment.notifyPrinterLoadComplete();
-		CompuwareUEM.leaveAction("printerListPopulate");
+		
+		// Dynatrace Printer List Load Leave
+		CompuwareUEM.leaveAction("Printer List Load");
 	}
 	
 	@Override
 	protected void onPreExecute() {
-		//DynaTrace ALL THE THINGS!!! (But mostly right now I'd like to know how long it takes to populate the list of all network printers in the bldg)
-		CompuwareUEM.enterAction("printerListPopulate");
+		// Dynatrace Printer List Load Enter
+		CompuwareUEM.enterAction("Printer List Load");
 		
 		// Clear the printer list and create the progress dialog
 		printerListFragment.clearList();

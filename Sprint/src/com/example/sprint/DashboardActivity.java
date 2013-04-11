@@ -209,8 +209,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
     	if(resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
     		
-    		//dynaTrace End Scanner
-    		CompuwareUEM.leaveAction("scannerActivity");
+    		// Dynatrace Scanner Time Leave
+    		CompuwareUEM.leaveAction("Scan Time");
     		
     		startJobListActivity(contents);
     	}

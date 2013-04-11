@@ -68,8 +68,8 @@ public class DashboardFragment extends Fragment implements OnItemClickListener{
     			i.putExtra("SCAN_MODE", "QR_CODE_MODE");
     			startActivityForResult(i, BARCODE_SCAN_REQUEST);
 			
-    			//dynaTrace Metric for scanning
-    			CompuwareUEM.enterAction("scannerActivity");
+    			// Dynatrace Scanner Time Enter
+    			CompuwareUEM.enterAction("Scan Time");
     			break;
     		}
     		case(1):

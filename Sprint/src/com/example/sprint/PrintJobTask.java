@@ -13,6 +13,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -91,6 +93,15 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
+			// Dynatrace Print Job Leave
+			CompuwareUEM.leaveAction("Print Job");
+			
+			// TODO: Dynatrace the Printer Name
+			
+			
+			// TODO: Dynatrace the Username
+			
+			
 			// Save the printer used to the recent printers list
 			((PrintConfirmationActivity) printConfirmationFragment.getActivity()).saveToRecentPrinter(
 					((PrintConfirmationActivity) printConfirmationFragment.getActivity()).getPrinterName());
@@ -115,6 +126,10 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	
 	@Override
 	protected void onPreExecute() {
+		
+		// Dynatrace Print Job Enter
+		CompuwareUEM.enterAction("Print Job");
+				
 		// Create a progress dialog for sending the print job
 		pd = new ProgressDialog(printConfirmationFragment.getActivity());
 		pd.setMessage("Sending Print Job...");

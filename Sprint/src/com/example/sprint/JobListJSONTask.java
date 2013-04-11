@@ -110,19 +110,18 @@ public class JobListJSONTask extends AsyncTask<Context, Void, ArrayList<Job>> {
 		// Set the jobs and show the list and dismiss the progress dialog
 		jobListFragment.setJobs(jobs);
 		jobListFragment.showList();
-		pd.dismiss();
-		
-		/*  Stop dynaTrace monitoring of jobListJSONTask */
+		pd.dismiss();		
 		jobListFragment.notifyJobLoadComplete();
-		CompuwareUEM.leaveAction("jobListJSONTask");
+		
+		// Dynatrace Job List Load Leave
+		CompuwareUEM.leaveAction("Job List Load");
 	}
 	
 	@Override
 	protected void onPreExecute() {
-		
-		/*  Start dynaTrace monitoring of jobListJSONTask */
-		CompuwareUEM.enterAction("build");
-		
+
+		// Dynatrace Job List Load Enter
+		CompuwareUEM.enterAction("Job List Load");		
 		
 		// Clear the list and start a progress dialog for loading jobs
 		jobListFragment.clearList();
