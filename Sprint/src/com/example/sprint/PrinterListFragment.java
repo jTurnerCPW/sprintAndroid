@@ -8,6 +8,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.AsyncTask.Status;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,6 +29,7 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 	private ArrayList<Printer> printers;
 	private LinearLayout view;
 	private Handler mHandler = new Handler();
+	private PrinterListJSONTask printerTask;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,8 +85,8 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 	}
 
 	private void getPrinters() {
-		PrinterListJSONTask task = new PrinterListJSONTask(this);
-		task.execute(getActivity());
+		printerTask = new PrinterListJSONTask(this);
+		printerTask.execute(getActivity());
 	}
 	
 	public void setPrinters(ArrayList<Printer> printers) {
@@ -122,5 +124,17 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 	public void notifyPrinterLoadComplete() {
 		
 		printerListView.onRefreshComplete();
+	}
+	
+	public void cancelPrinterTask() {
+		 if (printerTask != null && printerTask.getStatus() != Status.FINISHED)
+			 printerTask.cancel(true);
+	}
+	
+	@Override
+	public void onDestroy() {
+		
+		cancelPrinterTask();
+		super.onDestroy();
 	}
 }

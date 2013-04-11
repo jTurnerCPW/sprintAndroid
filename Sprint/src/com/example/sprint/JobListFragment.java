@@ -8,6 +8,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.AsyncTask.Status;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,6 +29,7 @@ public class JobListFragment extends Fragment{
 	private JobListAdapter adapter = null;
 	private ArrayList<Job> jobs;
 	private Handler mHandler = new Handler();
+	JobListJSONTask jobTask;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,8 +89,8 @@ public class JobListFragment extends Fragment{
 	}
 	
 	public void getJobs() {	
-		JobListJSONTask task = new JobListJSONTask(this);
-		task.execute(getActivity());
+		jobTask = new JobListJSONTask(this);
+		jobTask.execute(getActivity());
 	}
 	
 	public void setJobs(ArrayList<Job> jobs) {
@@ -135,5 +137,17 @@ public class JobListFragment extends Fragment{
 	public void notifyJobLoadComplete() {
 		
 		jobListView.onRefreshComplete();
+	}
+	
+	public void cancelJobTask() {
+		 if (jobTask != null && jobTask.getStatus() != Status.FINISHED)
+			 jobTask.cancel(true);
+	}
+	
+	@Override 
+	public void onDestroy() {
+		
+		cancelJobTask();
+		super.onDestroy();
 	}
 }
