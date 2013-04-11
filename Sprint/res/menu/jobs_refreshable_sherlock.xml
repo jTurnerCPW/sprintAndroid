@@ -6,9 +6,11 @@
 	    android:showAsAction="always"
 	    android:title=""
 	    android:icon="@drawable/default_ptr_rotate"/>
+	<!--  
     <item
         android:id="@+id/menu_settings"
         android:showAsAction="ifRoom"
         android:title="@string/action_settings"
         android:icon="@drawable/gear" />
+     -->
 </menu>
