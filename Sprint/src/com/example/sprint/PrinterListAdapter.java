@@ -3,7 +3,6 @@ package com.example.sprint;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -124,47 +123,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		}
 		return content;
 	}
-	
-	/*Add printer name to internal storage file*/	
-	public void saveToRecentPrinter(String name)
-	{
-		 FileOutputStream fos;
-		 String printerList = getRecentPrinters();
-		//Get Current recent list
-		 String[] printers = printerList.split(";");
-		
-		 //printer not already a recent, so add.
-		 if(!printerList.contains(name))
-		 {
-			 String content=name+";";
-			 //iterate through 4 or less printers then add new one to make 5.
-			 int length = 4;
-			 if(printers.length<4)
-			 {
-				 length = printers.length;
-			 }	
-			 for(int i=0;i<length&&printers[i]!="";i++)
-			 {
-				 content+=printers[i]+";";
-			 }
-			 try 
-			 {	
-				 fos = context.openFileOutput(storageFileName, Context.MODE_PRIVATE);
-				 fos.write(content.getBytes());
-				 fos.close();
-			 }
-			 catch (FileNotFoundException e) 
-			 {
-			     // TODO Auto-generated catch block
-			     e.printStackTrace();
-			 }
-			 catch (IOException e) 
-			 {
-			    // TODO Auto-generated catch block
-			    e.printStackTrace();
-			 }
-		 }
-	}
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -175,9 +133,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 
             @Override
             public void onClick(View v) {
-            	
-            	// Save the printer tapped to the recent printers
-            	saveToRecentPrinter(printerListFiltered.get(position).getName());
             	
             	// If we don't have the job yet go to the job selection
             	if(((PrinterListActivity)context).getJobId() == null)
