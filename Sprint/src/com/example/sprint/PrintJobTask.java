@@ -93,7 +93,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
-			// Dynatrace Print Job Leave
+			// Dynatrace Print Job Leave if Successful
 			CompuwareUEM.leaveAction("Print Job");
 			
 			// TODO: Dynatrace the Printer Name
@@ -115,6 +115,10 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		}
 		else
 		{
+			// Dynatrace Print Job Leave if Failed
+			CompuwareUEM.reportEvent("Print Job - Failed");
+			CompuwareUEM.leaveAction("Print Job");			
+			
 			// Error - Job couldn't be printed
 			Toast.makeText(printConfirmationFragment.getActivity(), 
 					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
