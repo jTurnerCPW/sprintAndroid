@@ -13,6 +13,7 @@
        android:stretchMode="columnWidth"
        android:verticalSpacing="20.0dip"
        android:layout_centerInParent="true"
+       android:numColumns="3"
        android:scrollbars="none"
       />
     

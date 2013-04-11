@@ -1,5 +1,6 @@
 package com.example.sprint;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -67,8 +68,11 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 		task.execute(getActivity());
 	}
 	
-	// Move and then Print the job id given
+	// Go back to the jobs page
 	public void goBackToJobs() {
-		getActivity().finish();
+		// Start the confirmation activity            	
+    	Intent intent = new Intent(getActivity(), JobListActivity.class);
+    	intent.putExtra("printer_name", ((PrintConfirmationActivity)this.getActivity()).getPrinterName());
+    	getActivity().startActivity(intent);
 	}
 }

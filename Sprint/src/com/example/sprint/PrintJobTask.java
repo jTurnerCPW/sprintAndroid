@@ -21,13 +21,13 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 public class PrintJobTask extends AsyncTask<Context, Void, String> {
-	private PrintConfirmationFragment PrintConfirmationFragment;
+	private PrintConfirmationFragment printConfirmationFragment;
 	private String jobId;
 	ProgressDialog pd;
 	
 	// Constructor for the print job task
-	public PrintJobTask(PrintConfirmationFragment PrintConfirmationFrag, String jobId) {
-		this.PrintConfirmationFragment = PrintConfirmationFrag;
+	public PrintJobTask(PrintConfirmationFragment printConfirmationFrag, String jobId) {
+		this.printConfirmationFragment = printConfirmationFrag;
 		this.jobId = jobId;
 	}
 	
@@ -65,7 +65,6 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 			    // Check if the printing of the job was successful
 		    	if(results.equals("0"))
 		    	{
-		    		Thread.sleep(2000);
 		    		return "Success";
 		    	}
 		    	else
@@ -92,15 +91,21 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
+			// Save the printer used to the recent printers list
+			((PrintConfirmationActivity) printConfirmationFragment.getActivity()).saveToRecentPrinter(
+					((PrintConfirmationActivity) printConfirmationFragment.getActivity()).getPrinterName());
+			
 			// Toast that it printed
-			Toast.makeText(PrintConfirmationFragment.getActivity(), 
+			Toast.makeText(printConfirmationFragment.getActivity(), 
 					"Your job has been sent to the printer!", Toast.LENGTH_LONG).show();
-			PrintConfirmationFragment.goBackToJobs();
+			
+			// Go back to the jobs page
+			printConfirmationFragment.goBackToJobs();
 		}
 		else
 		{
 			// Error - Job couldn't be printed
-			Toast.makeText(PrintConfirmationFragment.getActivity(), 
+			Toast.makeText(printConfirmationFragment.getActivity(), 
 					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
 		}
 		
@@ -111,7 +116,7 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		// Create a progress dialog for sending the print job
-		pd = new ProgressDialog(PrintConfirmationFragment.getActivity());
+		pd = new ProgressDialog(printConfirmationFragment.getActivity());
 		pd.setMessage("Sending Print Job...");
 		pd.show();
 		final AsyncTask<Context, Void, String> task = this;

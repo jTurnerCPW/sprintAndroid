@@ -9,7 +9,8 @@
     <item
         android:id="@+id/menu_scan"
         android:showAsAction="ifRoom"
-        android:title="@string/action_scan"/>
+        android:title="@string/action_scan"
+        android:icon="@drawable/scan_icon" />
     <item
         android:id="@+id/menu_settings"
         android:showAsAction="ifRoom"

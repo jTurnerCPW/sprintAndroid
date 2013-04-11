@@ -16,7 +16,7 @@ public class JobListActivity extends ABSFragmentActivity{
 		// Get the printer name
 		Intent intent = getIntent();
 		printerName = intent.getStringExtra("printer_name");
-		
+
 		// Set the view to the fragment
 		setContentView(R.layout.activity_job_list);	
 	}
@@ -45,5 +45,4 @@ public class JobListActivity extends ABSFragmentActivity{
 		JobListFragment jlfrag = (JobListFragment)getSupportFragmentManager().findFragmentById(R.id.jl_fragment);
 		jlfrag.refreshJobs();
 	}
-
 }

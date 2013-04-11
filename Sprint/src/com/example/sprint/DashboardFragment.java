@@ -56,30 +56,37 @@ public class DashboardFragment extends Fragment implements OnItemClickListener{
 	
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		if(position == 0)
-		{
-			Intent i = new Intent();	
-			/* setting the action string.  No other apps should respond to this request
-			 * because of the unique action string
-			 */
-			i.setAction("com.compuware.pdp.sprint");
-			i.putExtra("SCAN_MODE", "QR_CODE_MODE");
-			startActivityForResult(i, BARCODE_SCAN_REQUEST);
+    	switch(position)
+    	{
+    		case(0):
+    		{
+    			Intent i = new Intent();	
+    			/* setting the action string.  No other apps should respond to this request
+    			 * because of the unique action string
+    			 */
+    			i.setAction("com.compuware.pdp.sprint");
+    			i.putExtra("SCAN_MODE", "QR_CODE_MODE");
+    			startActivityForResult(i, BARCODE_SCAN_REQUEST);
 			
-			//dynaTrace Metric for scanning
-			CompuwareUEM.enterAction("scannerActivity");
-		}
-		else if(position == 1)
-		{
-			Intent intent = new Intent(getActivity(), PrinterListActivity.class);
-			startActivity(intent);
-		}   
-		else if(position == 2)
-		{
-			Intent intent = new Intent(getActivity(), JobListActivity.class);
-			startActivity(intent);
-		}   
-		
+    			//dynaTrace Metric for scanning
+    			CompuwareUEM.enterAction("scannerActivity");
+    			break;
+    		}
+    		case(1):
+    		{
+    			Intent intent = new Intent(getActivity(), PrinterListActivity.class);
+    			startActivity(intent);
+    			break;
+    		}   
+    		case(2):
+    		{
+    			Intent intent = new Intent(getActivity(), JobListActivity.class);
+    			startActivity(intent);
+    			break;
+    		}
+    		default:
+    		{break;}
+    	}
     }
  
     static class LauncherIcon {
