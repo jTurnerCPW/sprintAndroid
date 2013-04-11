@@ -18,8 +18,10 @@ import com.compuware.apm.uem.mobile.android.CompuwareUEM;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 public class PrintJobTask extends AsyncTask<Context, Void, String> {
@@ -93,14 +95,14 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
-			// Dynatrace Print Job Leave if Successful
+			// Grab the username from preferences
+		    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(printConfirmationFragment.getActivity());
+		    String prefsUserName = preferences.getString("pref_sprintUsername","");
+		    
+			// Dynatrace Print Job Leave if Successful including events for the username and printer
+			CompuwareUEM.reportEvent("Username - " + prefsUserName);
+			CompuwareUEM.reportEvent("Printer - " + ((PrintConfirmationActivity) printConfirmationFragment.getActivity()).getPrinterName());
 			CompuwareUEM.leaveAction("Print Job");
-			
-			// TODO: Dynatrace the Printer Name
-			
-			
-			// TODO: Dynatrace the Username
-			
 			
 			// Save the printer used to the recent printers list
 			((PrintConfirmationActivity) printConfirmationFragment.getActivity()).saveToRecentPrinter(
