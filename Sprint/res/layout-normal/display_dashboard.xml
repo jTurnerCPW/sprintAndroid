@@ -11,7 +11,7 @@
        android:layout_height="wrap_content"
        android:listSelector="@android:color/transparent"
        android:stretchMode="columnWidth"
-       android:verticalSpacing="20.0dip"
+       android:verticalSpacing="5.0dip"
        android:layout_centerInParent="true"
        android:scrollbars="none"
       />
