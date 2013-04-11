@@ -12,6 +12,7 @@ import android.os.AsyncTask.Status;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,4 +151,5 @@ public class JobListFragment extends Fragment{
 		cancelJobTask();
 		super.onDestroy();
 	}
+	
 }

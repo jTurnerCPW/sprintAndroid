@@ -140,6 +140,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
             		// When a printer is clicked show the job list and send the printer selected
                     Intent intent = new Intent(context, JobListActivity.class);
             		intent.putExtra("printer_name", printerListFiltered.get(position).getName());
+            		intent.putExtra("source", "printerlist");
             		context.startActivity(intent);
             	}
             	else
