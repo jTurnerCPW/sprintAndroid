@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvPrinterName"
             android:layout_toRightOf="@id/imgPrinter"
+            android:paddingTop="10sp"
             android:gravity="left"
             android:paddingLeft="5sp"
             android:text="" />
