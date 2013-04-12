@@ -17,7 +17,6 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		CompuwareUEM.leaveAction("Scan Time");
 
 		// initialize actionBar
 		actionBar = getSupportActionBar();
