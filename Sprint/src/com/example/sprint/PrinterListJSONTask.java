@@ -106,7 +106,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, String> {
 		if(result.equals("Success"))
 		{
 			// Dynatrace Printer List Load Leave
-			CompuwareUEM.leaveAction("Android Printer List Load");
+			CompuwareUEM.leaveAction("Printer List Load");
 		}
 		else if(result.equals("Timeout"))
 		{
@@ -129,7 +129,7 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		// Dynatrace Printer List Load Enter
-		CompuwareUEM.enterAction("Android Printer List Load");
+		CompuwareUEM.enterAction("Printer List Load");
 		
 		// Clear the printer list and create the progress dialog
 		printerListFragment.clearList();
