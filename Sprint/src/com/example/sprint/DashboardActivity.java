@@ -3,6 +3,7 @@ package com.example.sprint;
 import com.compuware.apm.uem.mobile.android.CompuwareUEM;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -14,10 +15,16 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class DashboardActivity  extends ABSFragmentActivity {
 	private static final int EDIT_ID = Menu.FIRST+2;
@@ -50,7 +57,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		
 		if (user_name.length()==0 && dialogsShowing == 0){
 
-			displayUserNameAlert();
+			//displayUserNameAlert();
+			usernameDialog();
 		}	
 	}
 	
@@ -185,6 +193,81 @@ public class DashboardActivity  extends ABSFragmentActivity {
 		dialogsShowing++;
 		Log.v("dialogCountUsrShow", "" + dialogsShowing);
 		alert.show();
+	}
+	
+	public void usernameDialog() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    final View layout = inflater.inflate(R.layout.username_confirmation, (ViewGroup) findViewById(R.id.root));
+	    final EditText username1 = (EditText) layout.findViewById(R.id.EditTextUsername1);
+	    final EditText username2 = (EditText) layout.findViewById(R.id.EditTextUsername2);
+	    final TextView error = (TextView) layout.findViewById(R.id.TextViewUsernameProblems);
+	      
+	    // Check the usernames as they type
+	    username2.addTextChangedListener(new TextWatcher() {
+	    	   public void afterTextChanged(Editable s) {
+	    	      String strPass1 = username1.getText().toString();
+	    	      String strPass2 = username2.getText().toString();
+	    	      if (strPass1.equals(strPass2)) {
+	    	         error.setText("Usernames Match");
+	    	      } else {
+	    	         error.setText("Usernames Do NOT Match");
+	    	      }
+	    	   }
+	    	   public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+	    	   public void onTextChanged(CharSequence s, int start, int before, int count) {}
+	    });
+	    
+	    // Create the dialog
+		final AlertDialog d = new AlertDialog.Builder(this)
+        .setView(layout)
+        .setTitle(R.string.pref_sprintUsername_Title)
+        .setPositiveButton(android.R.string.ok,
+                new Dialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface d, int which) {
+                        //Do nothing here. We override the onclick
+                    }
+                })
+        .create();
+	
+		// Listener for once the dialog is shown
+		d.setOnShowListener(new DialogInterface.OnShowListener() {
+		
+		    @Override
+		    public void onShow(DialogInterface dialog) {
+		
+		        Button b = d.getButton(AlertDialog.BUTTON_POSITIVE);
+		        b.setOnClickListener(new View.OnClickListener() {
+		
+		            @Override
+		            public void onClick(View view) {
+		            	// Check the usernames against each other
+			    	    String strUsername1 = username1.getText().toString();
+			    	    String strUsername2 = username2.getText().toString();
+			    	    if (strUsername1.equals(strUsername2)) {
+			    	    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			  				Editor editor = prefs.edit();
+			  				editor.putString(getResources().getString(R.string.pref_sprintUsername_key), strUsername1);
+			  				editor.commit();
+			  				d.dismiss();
+			    	    }  
+		            }
+		        });
+		    }
+		});
+		
+		// Handle the dismiss of the dialog
+		d.setOnDismissListener(new OnDismissListener() {
+			public void onDismiss(final DialogInterface dialog){
+				
+				dialogsShowing--;
+				checkWifi();
+			}
+		});
+		
+		// Show the dialog
+		dialogsShowing++;	
+		d.show();
 	}
 
 	public boolean startPreferences(View view){
