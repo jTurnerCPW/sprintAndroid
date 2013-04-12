@@ -221,7 +221,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		String humanReadableName = "";
 
 		//Set the building wing
-		if( codedName.substring(0, 1).toLowerCase().contentEquals("w") ) {
+		if( codedName.substring(0, 1).toLowerCase(Locale.getDefault()).contentEquals("w") ) {
 			//woodward
 			humanReadableName = "Woodward, ";
 		} else {
