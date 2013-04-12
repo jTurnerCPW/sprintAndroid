@@ -26,11 +26,11 @@
 
     <TextView
         android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvJobName"
         android:layout_toRightOf="@id/imgPrinter"
-        android:gravity="left"
+        android:gravity="center"
         android:paddingLeft="25sp"
         android:paddingTop="20sp"
         android:text="" />
@@ -56,7 +56,7 @@
 
     <TextView
         android:id="@+id/tvHRPrinterName"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvPrinterName"
         android:layout_toRightOf="@id/imgPrinter"
