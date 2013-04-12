@@ -209,8 +209,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
     	if(resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
     		
-    		//dynaTrace End Scanner
-    		CompuwareUEM.leaveAction("scannerActivity");
+    		// Dynatrace Scanner Time Leave
+    		CompuwareUEM.leaveAction("Scan Time");
     		
     		startJobListActivity(contents);
     	}
@@ -230,4 +230,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
 	protected void goHome(){
 
 	}
+	
+	// Disable back button
+	//	public void onBackPressed() {
+	//	}
 }

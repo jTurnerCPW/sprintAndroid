@@ -141,6 +141,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
             		// When a printer is clicked show the job list and send the printer selected
                     Intent intent = new Intent(context, JobListActivity.class);
             		intent.putExtra("printer_name", printerListFiltered.get(position).getName());
+            		intent.putExtra("source", "printerlist");
             		context.startActivity(intent);
             	}
             	else
@@ -326,7 +327,9 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 				FilterResults results) {
 			if (results.count == 0) {
 				/* No results matched the text input, so show the whole list */
-				printerListFiltered = printerListOriginal;
+				//printerListFiltered = printerListOriginal;
+				// Show nothing
+				printerListFiltered.clear();
 				notifyDataSetChanged();
 			} else {
 				/* There are matching results.  Show only those which match */

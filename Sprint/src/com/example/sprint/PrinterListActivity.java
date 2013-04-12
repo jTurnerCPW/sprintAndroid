@@ -42,8 +42,8 @@ public class PrinterListActivity extends ABSFragmentActivity{
     	if(resultCode == RESULT_OK) {
     		String contents = data.getStringExtra("SCAN_RESULT");
     		
-    		//dynaTrace End Scanner
-    		CompuwareUEM.leaveAction("scannerActivity");
+    		// Dynatrace Scanner Time Leave
+    		CompuwareUEM.leaveAction("Scan Time");
     		
     		// If we have the job name and id already just go to the confirmation
     		if(jobName != null && jobId != null)

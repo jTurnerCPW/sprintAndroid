@@ -13,11 +13,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.compuware.apm.uem.mobile.android.CompuwareUEM;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 public class PrintJobTask extends AsyncTask<Context, Void, String> {
@@ -91,6 +95,15 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		// Check if the HTTP Post was successful
 		if(result.equals("Success"))
 		{
+			// Grab the username from preferences
+		    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(printConfirmationFragment.getActivity());
+		    String prefsUserName = preferences.getString("pref_sprintUsername","");
+		    
+			// Dynatrace Print Job Leave if Successful including events for the username and printer
+			CompuwareUEM.reportEvent("Username - " + prefsUserName);
+			CompuwareUEM.reportEvent("Printer - " + ((PrintConfirmationActivity) printConfirmationFragment.getActivity()).getPrinterName());
+			CompuwareUEM.leaveAction("Print Job");
+			
 			// Save the printer used to the recent printers list
 			((PrintConfirmationActivity) printConfirmationFragment.getActivity()).saveToRecentPrinter(
 					((PrintConfirmationActivity) printConfirmationFragment.getActivity()).getPrinterName());
@@ -104,6 +117,10 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 		}
 		else
 		{
+			// Dynatrace Print Job Leave if Failed
+			CompuwareUEM.reportEvent("Print Job - Failed");
+			CompuwareUEM.leaveAction("Print Job");			
+			
 			// Error - Job couldn't be printed
 			Toast.makeText(printConfirmationFragment.getActivity(), 
 					"Error - Couldn't print job!", Toast.LENGTH_LONG).show();
@@ -115,6 +132,10 @@ public class PrintJobTask extends AsyncTask<Context, Void, String> {
 	
 	@Override
 	protected void onPreExecute() {
+		
+		// Dynatrace Print Job Enter
+		CompuwareUEM.enterAction("Print Job");
+				
 		// Create a progress dialog for sending the print job
 		pd = new ProgressDialog(printConfirmationFragment.getActivity());
 		pd.setMessage("Sending Print Job...");
