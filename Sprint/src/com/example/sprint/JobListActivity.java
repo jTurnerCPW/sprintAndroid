@@ -1,11 +1,7 @@
 package com.example.sprint;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 
 public class JobListActivity extends ABSFragmentActivity{
 	

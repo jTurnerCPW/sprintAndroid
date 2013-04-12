@@ -1,9 +1,9 @@
 package com.example.sprint;
 
+import java.util.Locale;
+
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -112,7 +112,7 @@ public class PrintConfirmationFragment extends Fragment implements OnClickListen
 		String humanReadableName = "";
 
 		//Set the building wing
-		if( codedName.substring(0, 1).toLowerCase().contentEquals("w") ) {
+		if( codedName.substring(0, 1).toLowerCase(Locale.getDefault()).contentEquals("w") ) {
 			//woodward
 			humanReadableName = "Woodward, ";
 		} else {
