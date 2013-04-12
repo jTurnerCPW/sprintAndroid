@@ -32,7 +32,7 @@
         android:layout_toRightOf="@id/imgPrinter"
         android:gravity="left"
         android:paddingLeft="25sp"
-        android:paddingTop="30sp"
+        android:paddingTop="20sp"
         android:text="" />
 
     <ImageView
@@ -47,7 +47,7 @@
         android:id="@+id/tvPrinterName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvJobName"
+        android:layout_below="@id/tvUserName"
         android:layout_marginLeft="10dip"
         android:layout_marginTop="20dip"
         android:layout_toRightOf="@id/imgPrinter"
@@ -60,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvPrinterName"
         android:layout_toRightOf="@id/imgPrinter"
+        android:layout_marginTop="20dip"
         android:gravity="center"
         android:text="" />
 
