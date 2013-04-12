@@ -10,6 +10,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -123,7 +124,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		}
 		return content;
 	}
-
+	
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -149,6 +150,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
                 	intent.putExtra("printer_name", printerListFiltered.get(position).getName());
             		intent.putExtra("job_id", ((PrinterListActivity)context).getJobId());
             		intent.putExtra("job_name", ((PrinterListActivity)context).getJobName());
+            		intent.putExtra("job_type", ((PrinterListActivity)context).getJobType());
+            		intent.putExtra("document_owner", ((PrinterListActivity)context).getDocumentOwner());
             		context.startActivity(intent);
             	}
             	
@@ -161,7 +164,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		/* Set the printer's name*/
 		TextView title = (TextView) convertView
 				.findViewById(R.id.tvPrinterTitle);
-		title.setText(printer.getName());
+		String hrPrinterName = makePrinterNameHumanReadable(printer.getName());
+		title.setText(hrPrinterName);
 
 		/* Set the printer's location */
 		TextView location = (TextView) convertView
@@ -206,6 +210,67 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> {
 		return convertView;
 	}
 
+	private String makePrinterNameHumanReadable(String codedName) {
+
+		//if the scan was not successful, or returned a string longer or shorter than expected
+		if(codedName == null || codedName.length() < 6) {
+			return "";
+		}
+
+		String humanReadableName = "";
+
+		//Set the building wing
+		if( codedName.substring(0, 1).toLowerCase().contentEquals("w") ) {
+			//woodward
+			humanReadableName = "Woodward, ";
+		} else {
+			if( codedName.substring(0, 1).contentEquals("m") ) {
+				//monroe
+				humanReadableName = "Monroe, ";
+			} else {
+				if( codedName.substring(0, 1).contentEquals("c") ) {
+					//center
+					humanReadableName = "Center, ";
+				} else { return "";}
+			}
+		}
+
+		//set the floor
+		String sFloor = codedName.substring(1, 3);
+		int floor = 0;
+		try {
+			floor = Integer.parseInt(sFloor);
+		} catch(Exception e) {
+			Log.v("makePrinterNameHumanReadable-floor", e.getLocalizedMessage());
+		}
+
+		if(floor == 0) {
+			//no-op.  keep human readable floor without adding a value since Integer.parse failed. 
+		} else {
+			humanReadableName = floor + " " + humanReadableName;
+		}
+
+		//set the printer number
+
+		//set the floor
+		String sPrinter = codedName.substring(4, 6);
+		int printer = 0;
+		try {
+			printer = Integer.parseInt(sPrinter);
+		} catch(Exception e) {
+			Log.v("makePrinterNameHumanReadable-printer", e.getLocalizedMessage());
+		}
+
+		if(printer == 0) {
+			//no-op.  keep human readable floor without adding a value since Integer.parse failed. 
+		} else {
+			humanReadableName = humanReadableName + "Printer " + printer;
+		}
+
+
+		return humanReadableName;
+	}
+	
 	@Override
 	public Filter getFilter() {
 		/* Get a custom filter for the adapter */

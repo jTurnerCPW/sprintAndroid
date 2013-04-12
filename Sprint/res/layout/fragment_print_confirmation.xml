@@ -4,65 +4,98 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView 
+    <TextView
         android:id="@+id/printerConfirm"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-		android:text="@string/print_details"
-		android:layout_marginBottom="10dip"
-		android:gravity="center" 
-		android:textSize="30sp"
-	/>
-
-    <TextView
-        android:id="@+id/tvJobName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/job_name"
+        android:layout_marginBottom="10dip"
         android:gravity="center"
+        android:text="@string/print_details"
+        android:textSize="24sp" />
+
+    <RelativeLayout
+        android:id="@+id/document_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/printerConfirm"
-        android:layout_marginTop="40dip"
-        android:layout_marginBottom="40dip"  />
-   
-    <ImageView
-        android:id="@+id/imgPrinter"
-        android:contentDescription="@string/printer"
-        android:layout_width="fill_parent"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/job_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/document_icon"
+            android:gravity="right"
+            android:paddingRight="25sp" />
+
+        <TextView
+            android:id="@+id/tvJobName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/job_icon"
+            android:gravity="left"
+            android:paddingLeft="5sp"
+            android:text="@string/job_name" />
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvJobName"
+            android:layout_toRightOf="@id/job_icon"
+            android:gravity="left"
+            android:paddingLeft="5sp"
+            android:paddingTop="10sp"
+            android:text="" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/printer_info"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@id/tvJobName"
-        android:src="@drawable/dash_print" />
-    
-    <TextView
-        android:id="@+id/tvPrinterName"
-        android:layout_width="fill_parent"
+        android:layout_below="@id/document_info"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imgPrinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:contentDescription="@string/printer"
+            android:paddingRight="25sp"
+            android:src="@drawable/dash_print" />
+
+        <TextView
+            android:id="@+id/tvPrinterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgPrinter"
+            android:gravity="left"
+            android:paddingLeft="5sp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tvHRPrinterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvPrinterName"
+            android:layout_toRightOf="@id/imgPrinter"
+            android:gravity="left"
+            android:paddingLeft="5sp"
+            android:text="" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bPrint"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/printer_name"
-        android:gravity="center" 
-        android:layout_marginTop="25dip"
-        android:layout_below="@id/imgPrinter" />
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/bCancel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/cancel" />
-
-        <Button
-            android:id="@+id/bPrint"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/print" />
-
-    </LinearLayout>
-
-   
+        android:layout_alignParentBottom="true"
+        android:text="@string/print" />
 
 </RelativeLayout>

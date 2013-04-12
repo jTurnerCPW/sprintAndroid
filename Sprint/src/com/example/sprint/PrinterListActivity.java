@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class PrinterListActivity extends ABSFragmentActivity{
-	private String printerName;
 	private String jobName;
 	private String jobId;
+	private String jobType;
+	private String jobOwner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,8 @@ public class PrinterListActivity extends ABSFragmentActivity{
 		Intent intent = getIntent();
 		jobName = intent.getStringExtra("job_name");
 		jobId = intent.getStringExtra("job_id");
+		jobType = intent.getStringExtra("job_type");
+		jobOwner = intent.getStringExtra("document_owner");
 		
 		// Set the view to the fragment
 		setContentView(R.layout.activity_printer_list);
@@ -50,6 +53,8 @@ public class PrinterListActivity extends ABSFragmentActivity{
         		intent.putExtra("printer_name", contents);
         		intent.putExtra("job_id", jobId);
         		intent.putExtra("job_name", jobName);
+        		intent.putExtra("job_type", jobType);
+        		intent.putExtra("document_owner", jobOwner);
         		startActivity(intent);
     		}
     		else
@@ -59,9 +64,7 @@ public class PrinterListActivity extends ABSFragmentActivity{
     	}
 	}
 	
-	public String getPrinterName() {
-		return printerName;
-	}
+	
 	
 	public String getJobName() {
 		return jobName;
@@ -69,6 +72,14 @@ public class PrinterListActivity extends ABSFragmentActivity{
 	
 	public String getJobId() {
 		return jobId;
+	}
+	
+	public String getJobType() {
+		return jobType;
+	}
+	
+	public String getDocumentOwner() {
+		return jobOwner;
 	}
 	
 	@Override

@@ -58,6 +58,8 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             		Intent intent = new Intent(context, PrinterListActivity.class);
             		intent.putExtra("job_id", jobListFiltered.get(position).getId());
             		intent.putExtra("job_name", jobListFiltered.get(position).getName());
+            		intent.putExtra("job_type", jobListFiltered.get(position).getType());
+            		intent.putExtra("document_owner", jobListFiltered.get(position).getUser());
             		context.startActivity(intent);
             	}
             	else
@@ -67,6 +69,8 @@ public class JobListAdapter extends ArrayAdapter<Job> {
             		intent.putExtra("printer_name", ((JobListActivity)context).getPrinterName());
             		intent.putExtra("job_id", jobListFiltered.get(position).getId());
             		intent.putExtra("job_name", jobListFiltered.get(position).getName());
+            		intent.putExtra("job_type", jobListFiltered.get(position).getType());
+            		intent.putExtra("document_owner", jobListFiltered.get(position).getUser());
             		context.startActivity(intent);
             	}	
             }
@@ -136,6 +140,7 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 		else if(jobType.equals("ai") || jobType.equals("svg") || jobType.equals("tiff") || jobType.equals("tif") || jobType.equals("tga") || jobType.equals("pspimage") ||
 				jobType.equals("psd") || jobType.equals("png") || jobType.equals("jpg") || jobType.equals("gif") || jobType.equals("bmp") || jobType.equals("jpg") ||
 				jobType.equals("jpeg") || jobType.equals("xcf")) {
+			uri = "drawable/image";
 			
 		}
 		//fall back on generic text icon

@@ -19,6 +19,8 @@
         android:id="@+id/imgPrinter"
         android:layout_width="60sp"
         android:layout_height="60sp"
+        android:paddingTop="3sp"
+        android:paddingBottom="3sp"
         android:contentDescription="@string/printer"
         
         android:layout_below="@id/separator"

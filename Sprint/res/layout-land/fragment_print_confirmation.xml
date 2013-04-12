@@ -4,67 +4,70 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView 
+    <TextView
         android:id="@+id/printerConfirm"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-		android:text="@string/print_details"
-		android:layout_marginBottom="10dip"
-		android:gravity="center" 
-		android:textSize="30sp"
-	/>
+        android:layout_marginBottom="10dip"
+        android:gravity="center"
+        android:text="@string/print_details"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/tvJobName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/job_name"
-        android:gravity="center"
+        android:layout_below="@id/printerConfirm"
+        android:layout_marginLeft="10dip"
         android:layout_marginTop="20dip"
         android:layout_toRightOf="@id/imgPrinter"
-        android:layout_below="@id/printerConfirm"
-        android:layout_marginLeft="10dip" />
-   
+        android:gravity="center"
+        android:text="@string/job_name" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvJobName"
+        android:layout_toRightOf="@id/imgPrinter"
+        android:gravity="left"
+        android:paddingLeft="25sp"
+        android:paddingTop="30sp"
+        android:text="" />
+
     <ImageView
         android:id="@+id/imgPrinter"
-        android:contentDescription="@string/printer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/printerConfirm"
+        android:contentDescription="@string/printer"
         android:src="@drawable/dash_print" />
-    
+
     <TextView
         android:id="@+id/tvPrinterName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/printer_name"
-        android:gravity="center"
-         android:layout_marginLeft="10dip"
-         android:layout_marginTop="20dip"
         android:layout_below="@id/tvJobName"
-        android:layout_toRightOf="@id/imgPrinter" />
-    
-    <LinearLayout
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="20dip"
+        android:layout_toRightOf="@id/imgPrinter"
+        android:gravity="center"
+        android:text="@string/printer_name" />
+
+    <TextView
+        android:id="@+id/tvHRPrinterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPrinterName"
+        android:layout_toRightOf="@id/imgPrinter"
+        android:gravity="center"
+        android:text="" />
+
+    <Button
+        android:id="@+id/bPrint"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/bCancel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/cancel" />
-
-        <Button
-            android:id="@+id/bPrint"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/print" />
-
-    </LinearLayout>
-
-   
+        android:layout_alignParentBottom="true"
+        android:text="@string/print" />
 
 </RelativeLayout>
