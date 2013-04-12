@@ -19,7 +19,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,7 +26,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class DashboardActivity  extends ABSFragmentActivity {
-	private static final int EDIT_ID = Menu.FIRST+2;
 	private int dialogsShowing = 0;
 	String user_name;
 
