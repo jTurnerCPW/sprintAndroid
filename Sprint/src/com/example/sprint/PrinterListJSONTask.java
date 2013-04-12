@@ -111,12 +111,12 @@ public class PrinterListJSONTask extends AsyncTask<Context, Void, String> {
 		else if(result.equals("Timeout"))
 		{
 			// Timeout tell the user to check if they are connected to Compuware and retry
-			Toast.makeText(printerListFragment.getActivity(), "Timeout!", Toast.LENGTH_LONG).show();
+			Toast.makeText(printerListFragment.getActivity(), "Timeout - Check WiFi Setting", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
 			// Error occurred most likely on the back end
-			Toast.makeText(printerListFragment.getActivity(), "Error - loading printers!", Toast.LENGTH_LONG).show();
+			Toast.makeText(printerListFragment.getActivity(), "Error - Try Again Momentarily", Toast.LENGTH_LONG).show();
 		}
 		
 		// Set the printers list up and dismiss the progress dialog
