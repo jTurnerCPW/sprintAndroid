@@ -130,12 +130,12 @@ public class JobListJSONTask extends AsyncTask<Context, Void, String> {
 		else if(result.equals("Timeout"))
 		{
 			// Timeout tell the user to check if they are connected to Compuware and retry
-			Toast.makeText(jobListFragment.getActivity(), "Timeout!", Toast.LENGTH_LONG).show();
+			Toast.makeText(jobListFragment.getActivity(), "Timeout - Check WiFi Setting", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
 			// Error occurred most likely on the back end
-			Toast.makeText(jobListFragment.getActivity(), "Error - loading jobs!", Toast.LENGTH_LONG).show();
+			Toast.makeText(jobListFragment.getActivity(), "Error - Try Again Momentarily", Toast.LENGTH_LONG).show();
 		}
 		
 		// Set the jobs and show the list and dismiss the progress dialog
