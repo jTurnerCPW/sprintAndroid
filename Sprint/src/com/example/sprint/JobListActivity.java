@@ -35,7 +35,7 @@ public class JobListActivity extends ABSFragmentActivity{
 	public String getPrinterName() {
 		return printerName;
 	}
-	
+
 	public String getJobName() {
 		return jobName;
 	}

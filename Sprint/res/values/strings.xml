@@ -3,32 +3,39 @@
 
     <string name="app_name">Sprint</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    
     <string name="pref_sprintUsername_Title">Compuware LAN ID</string>
     <string name="pref_sprintUsername_key">pref_sprintUsername</string>
-    <string name="pref_sprintUsername_default"> </string>
+    <string name="pref_sprintUsername_default"></string>
     <string name="pref_sprintUsername_summary">Please enter your Compuware LAN ID</string>
     <string name="sprintUsername_hint">ex: amiabc0</string>
-    <string name="jobs">Jobs</string>
+    
+    <string name="jobs">Documents</string>
+    <string name="job_name">Document Name</string>
+    <string name="document_owner">Document Owner</string>
+    <string name="job_filter">Search for Document</string>
+    <string name="empty_job_list">No documents to print...  Pull to refresh list.</string>
+    <string name="file_type">File Type</string>
+    <string name="job_lbl">Document Name:</string>
+    <string name="document_icon">Document Icon</string>
+    
     <string name="printers">Printers</string>
     <string name="printer">Printer</string>
     <string name="print">Print</string>
-    <string name="scanner">Scanner</string>
-    <string name="job_name">Job Name</string>
-    <string name="job_user">Job User</string>
     <string name="printer_name">Printer Name</string>
     <string name="printer_location">Location</string>
-    <string name="file_type">File Type</string>
+    <string name="printer_filter">Search for Printer ex:w05p02</string>
+     <string name="print_details">Print Details</string>
+     <string name="action_printers">Printer List</string>
+    
+    <string name="scanner">Scanner</string>
+    <string name="action_scan">Scan</string>
+    
     <string name="type_to_filter">type to filter</string>
-    <string name="printer_filter">Search for Printer</string>
-    <string name="job_filter">Search for Job</string>
+    <string name="action_refresh">Refresh List</string>
+    
     <string name="confirm">OK</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
-    <string name="action_scan">Scan</string>
-    <string name="print_details">Print Details</string>
-    <string name="action_printers">Printer List</string>
-    <string name="action_refresh">Refresh List</string>
-    <string name="empty_job_list">No documents to print...  Pull to refresh list.</string>
 
 </resources>

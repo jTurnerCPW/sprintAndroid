@@ -18,6 +18,8 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 	private String printerName;
 	private String jobId;
 	private String jobName;
+	private String jobType;
+	private String docOwner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 		printerName = intent.getStringExtra("printer_name");
 		jobId = intent.getStringExtra("job_id");
 		jobName = intent.getStringExtra("job_name");
+		jobType = intent.getStringExtra("job_type");
+		docOwner = intent.getStringExtra("document_owner");
 		
 		setContentView(R.layout.activity_print_confirmation);		
 	}
@@ -48,6 +52,14 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 	
 	public String getJobName() {
 		return jobName;
+	}
+	
+	public String getJobType() {
+		return jobType;
+	}
+	
+	public String getDocumentOwner() {
+		return docOwner;
 	}
 	
 	//Return concatenated list of recent printers. Separated by ';'

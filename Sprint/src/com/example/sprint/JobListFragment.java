@@ -132,6 +132,9 @@ public class JobListFragment extends Fragment{
 	
 	//pretty much what it says.  explore get jobs for more.  basically refreshes list - removes old items and puts in new ones 
 	public void refreshJobs() {
+		
+		//TODO: test this cookies. (clear)
+		searchText.setText("");
 		getJobs();
 	}
 

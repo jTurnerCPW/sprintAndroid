@@ -12,6 +12,7 @@ import android.os.AsyncTask.Status;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,8 +92,14 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 	
 	public void setPrinters(ArrayList<Printer> printers) {
 		this.printers = printers;
+		
+		//don't show the cups server in the device's list.  
+		for(int i = 0; i < printers.size(); i++) {
+			if(printers.get(i).getName().contentEquals("default"))
+				printers.remove(i);
+		}
 	}
-	
+
 	public void showList() {
 		adapter = buildAdapter();
 		printerListView.setAdapter(adapter);
@@ -118,6 +125,9 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 	
 	//pretty much what it says.  explore getPrinters for more.  basically refreshes list - removes old items and puts in new ones 
 	public void refreshPrinters() {
+		
+		//TODO: test this.  should work since resume has to be called by now
+		searchText.setText("");
 		getPrinters();
 	}
 	
