@@ -40,9 +40,6 @@ public class DashboardActivity  extends ABSFragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		
-		//TODO: insert some checks to see if there are dialogs up already
-		Log.v("dialogCountResume", "" + dialogsShowing);
-		
 		//check the username and password to see if they have been set correctly
 		checkUsrname();
 		checkWifi();
@@ -113,10 +110,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
 			public void onClick(DialogInterface dialog, int id) {
 				//Canceled.
 				
-				//TODO: FOLLOW HAN INTO THE TRASH COMPACTOR.  
+				//FOLLOW HAN INTO THE TRASH COMPACTOR.  
 				//really, chewy, cancel calls dismiss.  its okay. 
-				//dialogsShowing--;
-				//Log.v("dialogCountNetCan", "" + dialogsShowing);
 				
 				dialog.cancel();
 			}
@@ -169,10 +164,8 @@ public class DashboardActivity  extends ABSFragmentActivity {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
 				
-				//TODO: FOLLOW HAN INTO THE TRASH COMPACTOR.  
+				//FOLLOW HAN INTO THE TRASH COMPACTOR.  
 				//really, chewy, cancel calls dismiss.  its okay. 
-				//dialogsShowing--;
-				//Log.v("dialogCountUsrCan", "" + dialogsShowing);
 				
 				dialog.cancel();
 			}

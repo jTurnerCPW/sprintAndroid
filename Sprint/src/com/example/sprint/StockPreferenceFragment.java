@@ -20,7 +20,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
-//TODO This warning is irrelevant since we already do a check for the API level when the menu option is selected.  
+//This warning is irrelevant since we already do a check for the API level when the menu option is selected.  
 @SuppressLint("NewApi")
 public class StockPreferenceFragment extends PreferenceFragment {
   @Override

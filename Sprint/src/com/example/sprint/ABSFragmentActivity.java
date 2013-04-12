@@ -31,7 +31,7 @@ public class ABSFragmentActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
+
 		getSupportMenuInflater().inflate(R.menu.main_sherlock, menu);
 		return true;
 	}

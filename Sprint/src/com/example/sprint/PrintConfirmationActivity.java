@@ -22,7 +22,7 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(savedInstanceState);
 		
 		Intent intent = getIntent();
@@ -124,12 +124,10 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 			 }
 			 catch (FileNotFoundException e) 
 			 {
-			     // TODO Auto-generated catch block
 			     e.printStackTrace();
 			 }
 			 catch (IOException e) 
 			 {
-			    // TODO Auto-generated catch block
 			    e.printStackTrace();
 			 }
 		 }
@@ -164,12 +162,10 @@ public class PrintConfirmationActivity extends ABSFragmentActivity{
 			 }
 			 catch (FileNotFoundException e) 
 			 {
-			     // TODO Auto-generated catch block
 			     e.printStackTrace();
 			 }
 			 catch (IOException e) 
 			 {
-			    // TODO Auto-generated catch block
 			    e.printStackTrace();
 			 }
 		 }

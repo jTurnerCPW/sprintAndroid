@@ -118,14 +118,13 @@ public class PrinterListFragment extends Fragment implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	//pretty much what it says.  explore getPrinters for more.  basically refreshes list - removes old items and puts in new ones 
 	public void refreshPrinters() {
 		
-		//TODO: test this.  should work since resume has to be called by now
+		//no need to fetch searchText again since resume has to be called by now
 		searchText.setText("");
 		getPrinters();
 	}
