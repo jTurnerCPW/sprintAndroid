@@ -8,6 +8,7 @@
     <string name="pref_sprintUsername_key">pref_sprintUsername</string>
     <string name="pref_sprintUsername_default"></string>
     <string name="pref_sprintUsername_summary">Please enter your Compuware LAN ID</string>
+    <string name="pref_sprintUsername_Confirm">Confirm:</string>
     <string name="sprintUsername_hint">ex: amiabc0</string>
     
     <string name="jobs">Documents</string>

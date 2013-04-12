@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:id="@+id/root"
+    android:background="#85ccea"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_height="wrap_content"
@@ -12,29 +13,28 @@
         android:text="@string/pref_sprintUsername_summary"
         android:textStyle="bold"
         android:layout_marginBottom="10dp" 
+        android:layout_marginLeft="10dip"
         android:textSize="15sp"/>
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/TextViewUsername1"
-        android:text="@string/pref_sprintUsername_Title"
-        android:textStyle="bold" />
+  
     <EditText
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/EditTextUsername1"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="10dp"        
+        android:layout_marginLeft="10dip"
         android:hint="@string/sprintUsername_hint" />
-    <TextView
+     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:id="@+id/TextViewUsername2"
-        android:text="@string/pref_sprintUsername_Title"
+        android:id="@+id/TextViewUsername1"
+        android:text="@string/pref_sprintUsername_Confirm"        
+        android:layout_marginLeft="10dip"
         android:textStyle="bold" />
     <EditText
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/EditTextUsername2"
+        android:layout_marginLeft="10dip"
         android:hint="@string/sprintUsername_hint" 
         android:layout_marginBottom="10dp"/>
     <TextView
@@ -42,5 +42,6 @@
         android:layout_width="match_parent"
         android:id="@+id/TextViewUsernameProblems"
         android:textStyle="bold"
+        android:layout_marginLeft="10dip"
         android:gravity="center" />
 </LinearLayout>
