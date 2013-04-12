@@ -315,6 +315,7 @@ public class DashboardActivity  extends ABSFragmentActivity {
 	}
 	
 	// Disable back button
-	//	public void onBackPressed() {
-	//	}
+		public void onBackPressed() {
+			this.finish();
+		}
 }
